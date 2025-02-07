@@ -1,0 +1,2 @@
+java and mvn configuration settings
+mvn life cycle + plugin dependency management
