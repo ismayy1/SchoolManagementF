@@ -1,4 +1,4 @@
-package com.techproed.schoolmanagementbackendb326;
+package com.techproed;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
