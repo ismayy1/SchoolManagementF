@@ -1,15 +1,14 @@
 package com.techproed.entity.concretes.business;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Data
@@ -28,5 +27,7 @@ public class Lesson {
 
     private Boolean isCompulsory;
 
-
+    @JsonIgnore
+    @ManyToMany(mappedBy = "lessons")
+    private Set<LessonProgram> lessonPrograms;
 }
