@@ -38,5 +38,5 @@ public class EducationTerm {
     private LocalDate lastRegistrationDate;
 
     @OneToMany(mappedBy = "educationTerm", cascade = CascadeType.ALL)
-    private List<LessonProgram> lessonPrograms;
+    private List<LessonProgram> lessonProgram;
 }

@@ -26,7 +26,7 @@ public class StudentInfo {
 
     private Integer absentee;
 
-    private Double midTermExam;
+    private Double midtermExam;
 
     private Double finalExam;
 
@@ -34,7 +34,7 @@ public class StudentInfo {
 
     private Double examAverage;
 
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     private Note letterGrade;
 
     @ManyToOne

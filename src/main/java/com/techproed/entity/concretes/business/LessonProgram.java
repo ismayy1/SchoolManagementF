@@ -25,10 +25,13 @@ public class LessonProgram {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Long id;
 
+    @Enumerated(EnumType.STRING)
     private Day day;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm", timezone = "US")
     private LocalTime startTime;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm", timezone = "US")
     private LocalTime stopTime;
 
     @ManyToMany
@@ -46,7 +49,8 @@ public class LessonProgram {
     @ManyToMany(mappedBy = "lessonProgramList", fetch = FetchType.EAGER)
     private Set<User> users;
 
+    @PreRemove
     private void removeLessonFromUser() {
-        users.forEach(user -> users);
+        users.forEach(user -> user.getLessonProgramList().remove(this));
     }
 }

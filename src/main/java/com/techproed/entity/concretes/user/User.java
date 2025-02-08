@@ -34,11 +34,14 @@ public class User {
 
     @Column(unique = true)
     private String ssn;
+
     private String name;
+
     private String surname;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyy-MM-dd")
     private LocalDate birthday;
+
     private String birthplace;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
@@ -49,12 +52,19 @@ public class User {
 
     @Column(unique = true)
     private String email;
+
     private Boolean buildIn;
+
     private String motherName;
+
     private String fatherName;
+
     private int studentNumber;
+
     private boolean isActive;
+
     private Boolean isAdvisor;
+
     private Long advisorTeacherId;
 
     @Enumerated(EnumType.STRING)
@@ -73,7 +83,7 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "lesson_program_id")
     )
-    private Set<LessonProgram> lessonProgramsList;
+    private Set<LessonProgram> lessonProgramList;
 
     @JsonIgnore
     @ManyToMany(mappedBy = "studentList")
