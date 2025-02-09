@@ -2,6 +2,8 @@ package com.techproed.service.user;
 
 import com.techproed.entity.concretes.user.UserRole;
 import com.techproed.entity.enums.RoleType;
+import com.techproed.exception.ResourceNotFoundException;
+import com.techproed.payload.messages.ErrorMessages;
 import com.techproed.repository.user.UserRoleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,6 +16,6 @@ public class UserRoleService {
 
     public UserRole getUserRole(RoleType roleType) {
         return userRoleRepository.findByUserRoleType(roleType)
-                .orElseThrow(() -> new RuntimeException("UserRole Not Found!"));
+                .orElseThrow(() -> new ResourceNotFoundException(ErrorMessages.ROLE_NOT_FOUND));
     }
 }
