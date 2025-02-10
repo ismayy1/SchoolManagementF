@@ -1,6 +1,7 @@
 package com.techproed.controller.user;
 
 import com.techproed.payload.requests.user.UserRequest;
+import com.techproed.payload.response.abstracts.BaseUserResponse;
 import com.techproed.payload.response.business.ResponseMessage;
 import com.techproed.payload.response.user.UserResponse;
 import com.techproed.service.user.UserService;
@@ -20,5 +21,10 @@ public class UserController {
     @PostMapping("/save/{userRole}")
     public ResponseEntity<ResponseMessage<UserResponse>> saveUser (@RequestBody @Valid UserRequest userRequest, @PathVariable String userRole) {
         return ResponseEntity.ok(userService.saveUser(userRequest, userRole));
+    }
+
+    @GetMapping("getUserById/{userId}")
+    public ResponseMessage<BaseUserResponse> getUser(@PathVariable Long userId) {
+        return userService.findUserById(userId);
     }
 }

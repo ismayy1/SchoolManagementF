@@ -18,7 +18,7 @@ public abstract class AbstractUserRequest {
 
     @NotNull(message = "Please enter your username!")
     @Size(min = 4, max = 16, message = "Your username should be in limit {min}-{max}")
-    @Pattern(regexp = "\\A(?!\\s*\\Z). + ", message = "Your username must b consist of characters")
+    @Pattern(regexp = "\\A(?!\\s*\\Z).+", message = "Your username must b consist of characters")
     private String username;
 
     @NotNull(message = "Please enter your name")
