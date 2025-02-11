@@ -4,6 +4,7 @@ import com.techproed.entity.concretes.user.User;
 import com.techproed.payload.mappers.UserMapper;
 import com.techproed.payload.messages.SuccessMessages;
 import com.techproed.payload.requests.user.UserRequest;
+import com.techproed.payload.requests.user.UserRequestWithoutPassword;
 import com.techproed.payload.response.abstracts.BaseUserResponse;
 import com.techproed.payload.response.business.ResponseMessage;
 import com.techproed.payload.response.user.UserResponse;
@@ -17,6 +18,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.stream.Collectors;
 
 @Service
@@ -79,5 +81,50 @@ public class UserService {
 
         return userRepository.findUserByUserRoleQuery(userRole, pageable)
                 .map(userMapper::mapUserToUserResponse);
+    }
+
+    public ResponseMessage<UserResponse> updateUserById(UserRequest userRequest, Long userId) {
+//        Validate if user exists
+        User userFromDB = methodHelper.isUserExist(userId);
+
+//        BuildIn users cannot be updated
+        methodHelper.checkBuildIn(userFromDB);
+
+//        Unique properties Validation
+        uniquePropertyValidator.checkUniqueProperty(userFromDB, userRequest);
+
+//        Mapping
+        User userToSave = userMapper.mapUserRequestToUser(userRequest, userFromDB.getUserRole().getRoleName());
+        userToSave.setId(userId);
+
+        User savedUser = userRepository.save(userToSave);
+
+        return ResponseMessage.<UserResponse>builder()
+                .message(SuccessMessages.USER_UPDATE)
+                .httpStatus(HttpStatus.OK)
+                .returnBody(userMapper.mapUserToUserResponse(savedUser))
+                .build();
+    }
+
+    public String updateLoggedInUser(
+            UserRequestWithoutPassword userRequestWithoutPassword,
+            HttpServletRequest httpServletRequest) {
+
+        String username = (String) httpServletRequest.getAttribute("username");
+        User user = userRepository.findByUsername(username);
+        methodHelper.checkBuildIn(user);
+        uniquePropertyValidator.checkUniqueProperty(user, userRequestWithoutPassword);
+
+        user.setName(userRequestWithoutPassword.getName());
+        user.setSsn(userRequestWithoutPassword.getSsn());
+        user.setUsername(userRequestWithoutPassword.getUsername());
+        user.setBirthday(userRequestWithoutPassword.getBirthDay());
+        user.setBirthplace(userRequestWithoutPassword.getBirthPlace());
+        user.setEmail(userRequestWithoutPassword.getEmail());
+        user.setPhoneNumber(userRequestWithoutPassword.getPhoneNumber());
+        user.setGender(userRequestWithoutPassword.getGender());
+        userRepository.save(user);
+
+        return SuccessMessages.USER_UPDATE;
     }
 }

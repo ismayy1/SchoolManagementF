@@ -1,6 +1,7 @@
 package com.techproed.controller.user;
 
 import com.techproed.payload.requests.user.UserRequest;
+import com.techproed.payload.requests.user.UserRequestWithoutPassword;
 import com.techproed.payload.response.abstracts.BaseUserResponse;
 import com.techproed.payload.response.business.ResponseMessage;
 import com.techproed.payload.response.user.UserResponse;
@@ -10,6 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 @RestController
@@ -44,5 +46,19 @@ public class UserController {
     @DeleteMapping("/deleteUserById/{userId}")
     public ResponseEntity<String> deleteUserId(@PathVariable Long userId) {
         return ResponseEntity.ok(userService.deleteUserById(userId));
+    }
+
+    @PutMapping("/update/{userId}")
+    public ResponseMessage<UserResponse> updateUserById(@RequestBody @Valid UserRequest userRequest, @PathVariable Long userId) {
+
+        return userService.updateUserById(userRequest, userId);
+    }
+
+    @PatchMapping("/updateLoggedInUser")
+    public ResponseEntity<String> updateLoggedInUser(
+            @RequestBody @Valid UserRequestWithoutPassword userRequestWithoutPassword,
+            HttpServletRequest httpServletRequest) {
+
+        return ResponseEntity.ok(userService.updateLoggedInUser(userRequestWithoutPassword, httpServletRequest));
     }
 }
