@@ -31,31 +31,31 @@ public class SchoolManagementBackendB326Application implements CommandLineRunner
 //        Admin
         UserRole admin = new UserRole();
         admin.setRoleType(RoleType.ADMIN);
-        admin.setRoleName(RoleType.ADMIN.name());;
+        admin.setRoleName(RoleType.ADMIN.getName());
         userRoleRepository.save(admin);
 
 //        Dean
         UserRole dean = new UserRole();
         dean.setRoleType(RoleType.MANAGER);
-        dean.setRoleName(RoleType.MANAGER.name());;
+        dean.setRoleName(RoleType.MANAGER.getName());
         userRoleRepository.save(dean);
 
         //        Vice-Dean
         UserRole viceDean = new UserRole();
         viceDean.setRoleType(RoleType.ASSISTANT_MANAGER);
-        viceDean.setRoleName(RoleType.ASSISTANT_MANAGER.name());;
+        viceDean.setRoleName(RoleType.ASSISTANT_MANAGER.getName());
         userRoleRepository.save(viceDean);
 
         //        Student
         UserRole student = new UserRole();
         student.setRoleType(RoleType.STUDENT);
-        student.setRoleName(RoleType.STUDENT.name());;
+        student.setRoleName(RoleType.STUDENT.getName());
         userRoleRepository.save(student);
 
         //        Teacher
         UserRole teacher = new UserRole();
         teacher.setRoleType(RoleType.TEACHER);
-        teacher.setRoleName(RoleType.TEACHER.name());;
+        teacher.setRoleName(RoleType.TEACHER.getName());
         userRoleRepository.save(teacher);
       }
   }
