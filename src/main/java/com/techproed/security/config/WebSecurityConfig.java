@@ -31,6 +31,7 @@ public class WebSecurityConfig {
 //    the Exception Handler that we declared in the other class
     private final AuthEntryPointJwt authEntryPointJwt;
 
+    @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 //        CORS cross*origin resource sharing
         http.cors()
@@ -83,9 +84,9 @@ public class WebSecurityConfig {
     public WebMvcConfigurer corsConfigurer() {
         return new WebMvcConfigurer() {
             @Override
-            public void addCorsMapping(CorsRegistry registry) {
+            public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-//                        we let all sources to call our APIs
+                        //we let all sources to call our APIs
                         .allowedOrigins("*")
                         .allowedHeaders("*")
                         .allowedMethods("*");
