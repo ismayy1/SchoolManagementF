@@ -14,7 +14,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class userDetailsImpl implements UserDetails {
+public class UserDetailsImpl implements UserDetails {
 
     private Long id;
 
@@ -25,7 +25,7 @@ public class userDetailsImpl implements UserDetails {
 
     private List<GrantedAuthority> authorities;
 
-    public userDetailsImpl(Long id, String username, String password, String role) {
+    public UserDetailsImpl(Long id, String username, String password, String role) {
         this.id = id;
         this.username = username;
         this.password = password;

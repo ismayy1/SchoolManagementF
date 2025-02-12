@@ -4,7 +4,6 @@ import com.techproed.entity.concretes.user.User;
 import com.techproed.exception.ConflictException;
 import com.techproed.payload.messages.ErrorMessages;
 import com.techproed.payload.requests.abstracts.AbstractUserRequest;
-import com.techproed.payload.requests.user.UserRequest;
 import com.techproed.repository.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
