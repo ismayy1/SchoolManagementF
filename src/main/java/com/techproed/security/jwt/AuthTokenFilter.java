@@ -49,7 +49,7 @@ public class AuthTokenFilter extends OncePerRequestFilter {
                 request.setAttribute("username", username);
 //                6- we load user details information to security context
                 UsernamePasswordAuthenticationToken authentication =
-                        new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities();
+                        new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }
         } catch (UsernameNotFoundException e) {
