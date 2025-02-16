@@ -69,4 +69,6 @@ public class UserController {
 
         return ResponseEntity.ok(userService.updateLoggedInUser(userRequestWithoutPassword, httpServletRequest));
     }
+
+
 }
