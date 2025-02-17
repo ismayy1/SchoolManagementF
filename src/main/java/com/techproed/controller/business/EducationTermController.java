@@ -55,7 +55,7 @@ public class EducationTermController {
     }
 
     @PreAuthorize("hasAnyAuthority('Admin', 'Dean', 'ViceDean', 'Teacher')")
-    @PostMapping("/getByPage")
+    @GetMapping("/getByPage")
     public Page<EducationTermResponse> getByPage(
             @RequestParam (value = "page", defaultValue = "0") int page,
             @RequestParam (value = "size", defaultValue = "10") int size,
@@ -65,4 +65,9 @@ public class EducationTermController {
         return educationTermService.getByPage(page, size, sort, type);
     }
 
+    @PreAuthorize("hasAnyAuthority('Admin', 'Dean', 'ViceDean', 'Teacher')")
+    @DeleteMapping("/delete/{educationTermId}")
+    public ResponseMessage deleteEducationTerm(@PathVariable Long educationTermId) {
+        return educationTermService.deleteById(educationTermId);
+    }
 }

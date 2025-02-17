@@ -11,12 +11,15 @@ import com.techproed.payload.requests.business.EducationTermRequest;
 import com.techproed.payload.response.business.EducationTermResponse;
 import com.techproed.payload.response.business.ResponseMessage;
 import com.techproed.repository.business.EducationTermRepository;
+import com.techproed.service.helper.PageableHelper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import javax.validation.Valid;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -25,6 +28,7 @@ public class EducationTermService {
 
     private final EducationTermRepository educationTermRepository;
     private final EducationTermMapper educationTermMapper;
+    private final PageableHelper pageableHelper;
 
     public ResponseMessage<EducationTermResponse> save(@Valid EducationTermRequest educationTermRequest) {
 
@@ -107,6 +111,19 @@ public class EducationTermService {
 
     public Page<EducationTermResponse> getByPage(int page, int size, String sort, String type) {
 
+        Pageable pageable = pageableHelper.getPageable(page, size, sort, type);
+//        fetch paginated and sorted data from DB
+        Page<EducationTerm> educationTerms = educationTermRepository.findAll(pageable);
+//        use mapper
+        return educationTerms.map(educationTermMapper::mapEducationTermToEducationTermResponse);
+    }
 
+    public ResponseMessage deleteById(Long educationTermId) {
+
+        isEducationTermExist(educationTermId);
+        return ResponseMessage.builder()
+                .message(SuccessMessages.EDUCATION_TERM_DELETE)
+                .httpStatus(HttpStatus.OK)
+                .build();
     }
 }
