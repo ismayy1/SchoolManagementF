@@ -21,6 +21,7 @@ import org.springframework.stereotype.Service;
 import javax.validation.Valid;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -125,5 +126,17 @@ public class EducationTermService {
                 .message(SuccessMessages.EDUCATION_TERM_DELETE)
                 .httpStatus(HttpStatus.OK)
                 .build();
+    }
+
+    public List<EducationTermResponse> getAllEducationTerms() {
+        List<EducationTerm> allEducationTerms = educationTermRepository.findAll();
+        return allEducationTerms.stream().map(educationTermMapper::mapEducationTermToEducationTermResponse).collect(Collectors.toList());
+    }
+
+    public EducationTermResponse getEducationTermById(Long educationTermId) {
+        // Validate if the education term exists in the database
+        EducationTerm educationTerm = isEducationTermExist(educationTermId);
+        // Map the entity to DTO and return the response
+        return educationTermMapper.mapEducationTermToEducationTermResponse(educationTerm);
     }
 }

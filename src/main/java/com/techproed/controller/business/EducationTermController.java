@@ -41,8 +41,7 @@ public class EducationTermController {
     @PreAuthorize("hasAnyAuthority('Admin', 'Dean', 'ViceDean', 'Teacher')")
     @PostMapping("/getAll")
     public List<EducationTermResponse> getAllEducationTerms() {
-//        return educationTermService.getAllEducationTerms();
-        return null;
+        return educationTermService.getAllEducationTerms();
     }
 
 //    TODO
@@ -50,8 +49,7 @@ public class EducationTermController {
     @PreAuthorize("hasAnyAuthority('Admin', 'Dean', 'ViceDean', 'Teacher')")
     @PostMapping("/{educationTermId}")
     public EducationTermResponse getEducationTerm(Long educationTermId) {
-//        return educationTermService.getEducationTermById(educationTermId);
-        return null;
+        return educationTermService.getEducationTermById(educationTermId);
     }
 
     @PreAuthorize("hasAnyAuthority('Admin', 'Dean', 'ViceDean', 'Teacher')")

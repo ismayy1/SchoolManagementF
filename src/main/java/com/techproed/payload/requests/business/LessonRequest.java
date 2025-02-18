@@ -1,10 +1,10 @@
 package com.techproed.payload.requests.business;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.techproed.payload.response.business.LessonResponse;
+import com.techproed.payload.response.business.ResponseMessage;
+import lombok.*;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -25,4 +25,5 @@ public class LessonRequest {
 
     @NotNull(message = "Please enter isCompulsory")
     private Boolean isCompulsory;
+
 }
