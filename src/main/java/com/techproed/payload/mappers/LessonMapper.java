@@ -17,7 +17,7 @@ public class LessonMapper {
                 .build();
     }
 
-    public LessonResponse mapLessonToLessonRequest(Lesson lesson) {
+    public LessonResponse mapLessonToLessonResponse(Lesson lesson) {
         return LessonResponse.builder()
                 .lessonId(lesson.getId())
                 .lessonName(lesson.getLessonName())

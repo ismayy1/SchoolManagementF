@@ -2,6 +2,7 @@ package com.techproed.service.business;
 
 import com.techproed.entity.concretes.business.Lesson;
 import com.techproed.exception.ConflictException;
+import com.techproed.exception.ResourceNotFoundException;
 import com.techproed.payload.mappers.LessonMapper;
 import com.techproed.payload.messages.ErrorMessages;
 import com.techproed.payload.messages.SuccessMessages;
@@ -32,7 +33,7 @@ public class LessonService {
         Lesson savedLesson = lessonRepository.save(lesson);
 
         return ResponseMessage.<LessonResponse>builder()
-                .returnBody(lessonMapper.mapLessonToLessonRequest(savedLesson))
+                .returnBody(lessonMapper.mapLessonToLessonResponse(savedLesson))
                 .httpStatus(HttpStatus.CREATED)
                 .message(SuccessMessages.LESSON_SAVE)
                 .build();
@@ -43,5 +44,23 @@ public class LessonService {
         if (lessonRepository.findByLessonNameEqualsIgnoreCase(lessonName).isPresent()) {
             throw new ConflictException(String.format(ErrorMessages.ALREADY_CREATED_LESSON_MESSAGE, lessonName));
         }
+    }
+
+    public ResponseMessage deleteLesson(Long lessonId) {
+
+        return ResponseMessage.<LessonResponse>builder()
+                .returnBody(lessonMapper.mapLessonToLessonResponse(deleteLessonById(lessonId)))
+                .httpStatus(HttpStatus.OK)
+                .message(SuccessMessages.LESSON_DELETE)
+                .build();
+    }
+
+    private Lesson deleteLessonById(Long lessonId) {
+        Lesson lesson = lessonRepository.findById(lessonId)
+                .orElseThrow(() -> new ResourceNotFoundException(
+                        String.format(ErrorMessages.NOT_FOUND_LESSON_MESSAGE, lessonId)));
+        lessonRepository.delete(lesson);
+
+        return lesson;
     }
 }
