@@ -1,5 +1,6 @@
 package com.techproed.controller.business;
 
+import com.techproed.entity.concretes.business.Lesson;
 import com.techproed.payload.requests.business.LessonRequest;
 import com.techproed.payload.response.business.LessonResponse;
 import com.techproed.payload.response.business.ResponseMessage;
@@ -11,6 +12,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/lesson")
@@ -63,5 +65,11 @@ public class LessonController {
             @RequestParam(value = "type",defaultValue = "desc") String type) {
         return lessonService.getLessonByPage(page,size,sort,type);
 //        return null;
+    }
+
+    @PreAuthorize("hasAnyAuthority('Admin','Dean','ViceDean')")
+    @GetMapping("/getAllByIdSet")
+    public Set<Lesson> getAllByIdSet(@RequestParam(name = "lessonId") Set<Long> idSet) {
+        return lessonService.getAllByIdSet(idSet);
     }
 }

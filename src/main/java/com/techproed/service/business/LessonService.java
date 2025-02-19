@@ -18,6 +18,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import javax.validation.Valid;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -109,5 +111,11 @@ public class LessonService {
                 .httpStatus(HttpStatus.OK)
                 .message(SuccessMessages.LESSON_DELETE)
                 .build();
+    }
+
+    public Set<Lesson> getAllByIdSet(Set<Long> idSet) {
+        return idSet.stream()
+                .map(this::isLessonExistById)
+                .collect(Collectors.toSet());
     }
 }
