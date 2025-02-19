@@ -61,7 +61,7 @@ public class LessonController {
             @RequestParam(value = "size",defaultValue = "10") int size,
             @RequestParam(value = "sort",defaultValue = "lessonName") String sort,
             @RequestParam(value = "type",defaultValue = "desc") String type) {
-        //return lessonService.getLessonByPage(page,size,sort,type);
-        return null;
+        return lessonService.getLessonByPage(page,size,sort,type);
+//        return null;
     }
 }

@@ -10,7 +10,10 @@ import com.techproed.payload.requests.business.LessonRequest;
 import com.techproed.payload.response.business.LessonResponse;
 import com.techproed.payload.response.business.ResponseMessage;
 import com.techproed.repository.business.LessonRepository;
+import com.techproed.service.helper.PageableHelper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +26,7 @@ public class LessonService {
 
     private final LessonRepository lessonRepository;
     private final LessonMapper lessonMapper;
+    private final PageableHelper pageableHelper;
 
     public ResponseMessage<LessonResponse> saveLesson(@Valid LessonRequest lessonRequest) {
 
@@ -76,4 +80,10 @@ public class LessonService {
     }
 
 
+    public Page<LessonResponse> getLessonByPage(int page, int size, String sort, String type) {
+
+        Pageable pageable = pageableHelper.getPageable(page, size, sort, type);
+        Page<Lesson> lessons = lessonRepository.findAll(pageable);
+        return lessons.map(lessonMapper::mapLessonToLessonResponse);
+    }
 }
