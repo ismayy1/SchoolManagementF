@@ -86,4 +86,19 @@ public class LessonService {
         Page<Lesson> lessons = lessonRepository.findAll(pageable);
         return lessons.map(lessonMapper::mapLessonToLessonResponse);
     }
+
+    public ResponseMessage<LessonResponse> findLessonByName(String lessonName) {
+
+        return ResponseMessage.<LessonResponse>builder()
+                .message(SuccessMessages.LESSON_FOUND)
+                .returnBody(lessonMapper.mapLessonToLessonResponse(getLessonByName(lessonName)))
+                .httpStatus(HttpStatus.OK)
+                .build();
+    }
+
+    private Lesson getLessonByName(String lessonName) {
+        return lessonRepository.findByLessonNameEqualsIgnoreCase(lessonName)
+                .orElseThrow(() -> new ResourceNotFoundException(
+                        String.format(ErrorMessages.NOT_FOUND_LESSON_IN_LIST, lessonName)));
+    }
 }

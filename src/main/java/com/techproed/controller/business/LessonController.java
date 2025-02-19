@@ -48,8 +48,8 @@ public class LessonController {
     @GetMapping("/getLessonByName")
     public ResponseMessage<LessonResponse>getLessonByName(
             @RequestParam String lessonName) {
-//        return lessonService.findLessonByName(lessonName);
-        return null;
+        return lessonService.findLessonByName(lessonName);
+//        return null;
     }
 
 
