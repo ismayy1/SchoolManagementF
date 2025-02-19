@@ -101,4 +101,13 @@ public class LessonService {
                 .orElseThrow(() -> new ResourceNotFoundException(
                         String.format(ErrorMessages.NOT_FOUND_LESSON_IN_LIST, lessonName)));
     }
+
+    public ResponseMessage deleteLesson(Long lessonId) {
+
+        return ResponseMessage.<LessonResponse>builder()
+                .returnBody(lessonMapper.mapLessonToLessonResponse(deleteLessonById(lessonId)))
+                .httpStatus(HttpStatus.OK)
+                .message(SuccessMessages.LESSON_DELETE)
+                .build();
+    }
 }
