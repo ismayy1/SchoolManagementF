@@ -6,6 +6,7 @@ import com.techproed.payload.response.business.ResponseMessage;
 import com.techproed.service.business.LessonService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,11 +27,20 @@ public class LessonController {
         return lessonService.saveLesson(lessonRequest);
     }
 
+    @PreAuthorize("hasAnyAuthority('Admin', 'Dean', 'ViceDean')")
+    @PutMapping("/update/{lessonId}")
+    public ResponseEntity<LessonResponse> updateLessonById(
+            @PathVariable Long lessonId,
+            @RequestBody @Valid LessonRequest lessonRequest) {
+        return ResponseEntity.ok(lessonService.updateLesson(lessonRequest, lessonId));
+    }
+
 //    TODO edip
     @PreAuthorize("hasAnyAuthority('Admin', 'Dean', 'ViceDean')")
     @PostMapping("/delete/{lessonId}")
     public ResponseMessage deleteLesson(@PathVariable Long lessonId) {
-        return lessonService.deleteLesson(lessonId);
+//        return lessonService.deleteLesson(lessonId);
+        return null;
     }
 
     //TODO nesli
@@ -38,7 +48,7 @@ public class LessonController {
     @GetMapping("/getLessonByName")
     public ResponseMessage<LessonResponse>getLessonByName(
             @RequestParam String lessonName) {
-        //return lessonService.findLessonByName(lessonName);
+//        return lessonService.findLessonByName(lessonName);
         return null;
     }
 
