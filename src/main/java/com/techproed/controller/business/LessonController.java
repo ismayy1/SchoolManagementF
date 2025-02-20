@@ -12,6 +12,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 import java.util.Set;
 
 @RestController
@@ -69,7 +70,7 @@ public class LessonController {
 
     @PreAuthorize("hasAnyAuthority('Admin','Dean','ViceDean')")
     @GetMapping("/getAllByIdSet")
-    public Set<Lesson> getAllByIdSet(@RequestParam(name = "lessonId") Set<Long> idSet) {
+    public List<Lesson> getAllByIdSet(@RequestParam(name = "lessonId") List<Long> idSet) {
         return lessonService.getAllByIdSet(idSet);
     }
 }

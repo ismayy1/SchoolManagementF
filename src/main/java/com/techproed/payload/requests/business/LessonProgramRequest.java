@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalTime;
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -31,7 +32,7 @@ public class LessonProgramRequest {
 
     @NotNull(message="Please select lesson")
     @Size(min=1, message ="Lesson must not be empty")
-    private Set<Long> lessonIdList;
+    private List<Long> lessonIdList;
 
     @NotNull(message="Please enter education term")
     private Long educationTermId;

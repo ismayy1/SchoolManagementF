@@ -18,6 +18,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import javax.validation.Valid;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -113,9 +114,9 @@ public class LessonService {
                 .build();
     }
 
-    public Set<Lesson> getAllByIdSet(Set<Long> idSet) {
+    public List<Lesson> getAllByIdSet(List<Long> idSet) {
         return idSet.stream()
                 .map(this::isLessonExistById)
-                .collect(Collectors.toSet());
+                .collect(Collectors.toList());
     }
 }

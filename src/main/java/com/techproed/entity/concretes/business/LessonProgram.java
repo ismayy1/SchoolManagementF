@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalTime;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -22,7 +23,7 @@ import java.util.Set;
 public class LessonProgram {
 
     @Id
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Enumerated(EnumType.STRING)
@@ -40,14 +41,14 @@ public class LessonProgram {
             joinColumns = @JoinColumn(name = "lessonProgram_id"),
             inverseJoinColumns = @JoinColumn(name = "lesson_id")
     )
-    private Set<Lesson> lessons;
+    private List<Lesson> lessons;
 
     @ManyToOne
     private EducationTerm educationTerm;
 
     @JsonIgnore
     @ManyToMany(mappedBy = "lessonProgramList", fetch = FetchType.EAGER)
-    private Set<User> users;
+    private List<User> users;
 
     @PreRemove
     private void removeLessonFromUser() {
