@@ -1,14 +1,17 @@
 package com.techproed.entity.concretes.business;
 
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.util.Set;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import javax.persistence.*;
-import java.util.Set;
 
 @Entity
 @Data
@@ -16,7 +19,6 @@ import java.util.Set;
 @NoArgsConstructor
 @Builder
 public class Lesson {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -29,5 +31,9 @@ public class Lesson {
 
     @JsonIgnore
     @ManyToMany(mappedBy = "lessons")
-    private Set<LessonProgram> lessonPrograms;
+    private Set<LessonProgram>lessonPrograms;
+
+
+
+
 }

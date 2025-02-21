@@ -1,16 +1,22 @@
 package com.techproed.entity.concretes.business;
 
-
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.techproed.entity.concretes.user.User;
 import com.techproed.entity.enums.Note;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.criteria.CriteriaBuilder.In;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import javax.persistence.*;
 
 @Entity
 @Data
@@ -19,9 +25,8 @@ import javax.persistence.*;
 @Builder
 public class StudentInfo {
 
-
     @Id
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private Integer absentee;

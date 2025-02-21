@@ -1,17 +1,23 @@
 package com.techproed.entity.concretes.business;
 
-
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.techproed.entity.concretes.user.User;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.List;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import javax.persistence.*;
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.util.List;
 
 @Entity
 @Data
@@ -21,22 +27,21 @@ import java.util.List;
 public class Meet {
 
     @Id
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String description;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "yyyy-MM-dd")
     private LocalDate date;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm", timezone = "US")
+    @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "HH:mm",timezone = "US")
     private LocalTime startTime;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm", timezone = "US")
+    @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "HH:mm",timezone = "US")
     private LocalTime stopTime;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
-
     private User advisoryTeacher;
 
     @ManyToMany
@@ -45,5 +50,5 @@ public class Meet {
             joinColumns = @JoinColumn(name = "meet_id"),
             inverseJoinColumns = @JoinColumn(name = "student_id")
     )
-    private List<User> studentList;
+    private List<User>studentList;
 }
