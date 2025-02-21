@@ -1,6 +1,6 @@
 package com.techproed.service.helper;
 
-import com.techproed.entity.ContactMessage;
+import com.techproed.entity.concretes.business.ContactMessage;
 import com.techproed.entity.concretes.user.User;
 import com.techproed.exception.BadRequestException;
 import com.techproed.exception.ResourceNotFoundException;
