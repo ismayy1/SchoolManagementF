@@ -14,15 +14,9 @@ import java.time.LocalDateTime;
 @Builder
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ContactMessageResponse {
-
     private String name;
-
     private String email;
-
     private String subject;
-
     private String message;
-
     private LocalDateTime createdAt;
-
 }
