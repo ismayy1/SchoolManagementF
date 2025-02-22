@@ -26,5 +26,4 @@ public class ContactMessageRequest {
 
     @NotNull(message = "Message must not be empty")
     private String message;
-
 }
