@@ -3,7 +3,9 @@ package com.techproed.service.business;
 import com.techproed.entity.concretes.business.EducationTerm;
 import com.techproed.entity.concretes.business.Lesson;
 import com.techproed.entity.concretes.business.LessonProgram;
+import com.techproed.exception.BadRequestException;
 import com.techproed.payload.mappers.LessonProgramMapper;
+import com.techproed.payload.messages.ErrorMessages;
 import com.techproed.payload.messages.SuccessMessages;
 import com.techproed.payload.requests.business.LessonProgramRequest;
 import com.techproed.payload.response.LessonProgramResponse;
@@ -66,5 +68,20 @@ public class LessonProgramService {
                 .stream()
                 .map(lessonProgramMapper::mapLessonProgramToLessonProgramResponse)
                 .collect(Collectors.toList());
+    }
+
+//    TODO deleteLessonProgramById must be implemented
+//
+
+//    TODO each ID is not being checked, must be implemented to
+//     each and every ID by improving the implementation
+    public List<LessonProgram> getLessonProgramById (List<Long> lessonIdList) {
+        List<LessonProgram> lessonProgramList = lessonProgramRepository.findAllById(lessonIdList);
+
+        if (lessonProgramList.isEmpty()) {
+            throw new BadRequestException(ErrorMessages.NOT_FOUND_LESSON_PROGRAM_MESSAGE_WITHOUT_ID_INFO);
+        }
+
+        return lessonProgramList;
     }
 }
