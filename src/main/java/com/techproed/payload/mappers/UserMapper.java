@@ -4,6 +4,7 @@ import com.techproed.entity.concretes.user.User;
 import com.techproed.entity.enums.RoleType;
 import com.techproed.exception.ResourceNotFoundException;
 import com.techproed.payload.messages.ErrorMessages;
+import com.techproed.payload.requests.abstracts.BaseUserRequest;
 import com.techproed.payload.requests.user.UserRequest;
 import com.techproed.payload.response.user.UserResponse;
 import com.techproed.service.user.UserRoleService;
@@ -28,7 +29,7 @@ public class UserMapper {
      * @return User entity
      */
 
-    public User mapUserRequestToUser(UserRequest userRequest, String userRole) {
+    public User mapUserRequestToUser(BaseUserRequest userRequest, String userRole) {
         User user = User.builder()
                 .username(userRequest.getUsername())
                 .name(userRequest.getName())

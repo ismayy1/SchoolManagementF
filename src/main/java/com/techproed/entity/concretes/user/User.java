@@ -69,7 +69,10 @@ public class User {
     private Boolean buildIn;
     private String motherName;
     private String fatherName;
+
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int studentNumber;
+
     private boolean isActive;
     private Boolean isAdvisor;
     private Long advisorTeacherId;

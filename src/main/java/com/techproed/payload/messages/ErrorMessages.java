@@ -14,10 +14,11 @@ public class ErrorMessages {
     public static final String PASSWORD_SHOULD_NOT_MATCHED = "Your passwords are not matched" ;
 
     //student
-    public static final String STUDENT_INFO_NOT_FOUND = "Error: Student Info with id %d not found" ;
+    public static final String STUDENT_INFO_NOT_FOUND = "Error: Student Info with id %d not found";
 
     //advisor teacher
     public static final String NOT_FOUND_ADVISOR_MESSAGE = "Error: Advisor Teacher with id %s not found" ;
+    public static final String NOT_ADVISOR_TEACHER_MESSAGE = "Error: Teacher with id %s is not an advisor teacher" ;
 
     //unique properties
     public static final String ALREADY_REGISTER_MESSAGE_USERNAME = "Error: User with username %s is already registered";
