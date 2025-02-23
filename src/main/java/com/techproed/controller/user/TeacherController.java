@@ -7,8 +7,11 @@ import com.techproed.service.user.TeacherService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/teacher")
@@ -19,7 +22,7 @@ public class TeacherController {
 
     @PreAuthorize("hasAnyAuthority('Admin')")
     @PostMapping("/save")
-    public ResponseMessage<UserResponse> saveTeacher(TeacherRequest teacherRequest) {
+    public ResponseMessage<UserResponse> saveTeacher(@RequestBody @Valid TeacherRequest teacherRequest) {
         return teacherService.saveTeacher(teacherRequest);
     }
 }
