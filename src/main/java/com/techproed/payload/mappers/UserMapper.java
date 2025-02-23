@@ -1,18 +1,23 @@
 package com.techproed.payload.mappers;
 
+import com.techproed.entity.concretes.business.LessonProgram;
 import com.techproed.entity.concretes.user.User;
 import com.techproed.entity.enums.RoleType;
 import com.techproed.exception.ResourceNotFoundException;
 import com.techproed.payload.messages.ErrorMessages;
 import com.techproed.payload.requests.abstracts.BaseUserRequest;
 import com.techproed.payload.requests.user.UserRequest;
+import com.techproed.payload.response.abstracts.BaseUserResponse;
+import com.techproed.payload.response.user.StudentResponse;
 import com.techproed.payload.response.user.UserResponse;
 import com.techproed.service.user.UserRoleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
@@ -83,6 +88,26 @@ public class UserMapper {
                 .ssn(user.getSsn())
                 .email(user.getEmail())
                 .userRole(user.getUserRole().getRoleType().getName())
+                .build();
+    }
+
+    public StudentResponse mapUserToStudentResponse(User student) {
+        return StudentResponse.builder()
+                .id(student.getId())
+                .username(student.getUsername())
+                .name(student.getName())
+                .surname(student.getSurname())
+                .birthDay(student.getBirthday())
+                .ssn(student.getSsn())
+                .birthPlace(student.getBirthplace())
+                .phoneNumber(student.getPhoneNumber())
+                .gender(student.getGender())
+                .email(student.getEmail())
+                .studentNumber(student.getStudentNumber())
+                .motherName(student.getMotherName())
+                .fatherName(student.getFatherName())
+                .lessonProgramList(new ArrayList<>(student.getLessonProgramList()))
+                .isActive(student.isActive())
                 .build();
     }
 }

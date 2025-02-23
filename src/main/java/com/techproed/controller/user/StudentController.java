@@ -2,6 +2,7 @@ package com.techproed.controller.user;
 
 import com.techproed.payload.requests.user.StudentRequest;
 import com.techproed.payload.response.business.ResponseMessage;
+import com.techproed.payload.response.user.StudentResponse;
 import com.techproed.service.user.StudentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -18,7 +19,7 @@ public class StudentController {
 
     @PreAuthorize(("hasAnyAuthority('Admin')"))
     @PostMapping("/save")
-    public ResponseMessage<StudentRequest> save(StudentRequest studentRequest) {
+    public ResponseMessage<StudentResponse> save(StudentRequest studentRequest) {
         return studentService.save(studentRequest);
     }
 }
