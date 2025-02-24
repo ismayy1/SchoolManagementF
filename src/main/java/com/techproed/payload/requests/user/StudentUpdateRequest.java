@@ -2,6 +2,7 @@ package com.techproed.payload.requests.user;
 
 import com.techproed.payload.requests.abstracts.AbstractUserRequest;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
@@ -12,6 +13,7 @@ import javax.validation.constraints.Size;
 @Getter
 @Setter
 @SuperBuilder
+@NoArgsConstructor
 public class StudentUpdateRequest extends AbstractUserRequest {
 
     @NotNull(message = "Please enter mother name")

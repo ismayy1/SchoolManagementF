@@ -33,6 +33,6 @@ public class StudentController {
             HttpServletRequest httpServletRequest,
             @RequestBody @Valid StudentUpdateRequest studentUpdateRequest) {
 
-        return studentService.updateStudent(httpServletRequest, studentUpdateRequest);
+        return ResponseEntity.ok(studentService.updateStudent(httpServletRequest, studentUpdateRequest));
     }
 }
