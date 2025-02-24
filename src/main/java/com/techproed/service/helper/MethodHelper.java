@@ -2,6 +2,7 @@ package com.techproed.service.helper;
 
 import com.techproed.entity.concretes.business.ContactMessage;
 import com.techproed.entity.concretes.user.User;
+import com.techproed.entity.enums.RoleType;
 import com.techproed.exception.BadRequestException;
 import com.techproed.exception.ResourceNotFoundException;
 import com.techproed.payload.messages.ErrorMessages;
@@ -45,6 +46,12 @@ public class MethodHelper {
     public void checkIsAdvisor(User user) {
         if (!user.getIsAdvisor()) {
             throw new BadRequestException(String.format(ErrorMessages.NOT_ADVISOR_TEACHER_MESSAGE, user.getUsername()));
+        }
+    }
+
+    public void checkUserRole(User user, RoleType roleType) {
+        if (!user.getUserRole().getRoleType().equals(roleType)) {
+            throw new BadRequestException(ErrorMessages.NOT_HAVE_EXPECTED_ROLE_USER);
         }
     }
 

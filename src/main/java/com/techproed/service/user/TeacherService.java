@@ -16,6 +16,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Service
@@ -50,6 +51,27 @@ public class TeacherService {
                 .message(SuccessMessages.TEACHER_SAVE)
                 .httpStatus(HttpStatus.CREATED)
                 .returnBody(userMapper.mapUserToUserResponse(savedTeacher))
+                .build();
+    }
+
+    public ResponseMessage<UserResponse> updateTeacherById(@Valid TeacherRequest teacherRequest, Long userId) {
+//        Validate if teacher exist
+        User teacher = methodHelper.isUserExist(userId);
+//        validate if user is a teacher
+        methodHelper.checkUserRole(teacher, RoleType.TEACHER);
+//        validate unique props
+        uniquePropertyValidator.checkUniqueProperty(teacher, teacherRequest);
+        List<LessonProgram> lessonPrograms =
+                lessonProgramService.getLessonProgramById(teacherRequest.getLessonProgramList());
+        User teacherToUpdate = userMapper.mapUserRequestToUser(teacherRequest, RoleType.TEACHER.getName());
+        teacherToUpdate.setId(userId);
+        teacherToUpdate.setLessonProgramList(lessonPrograms);
+        teacherToUpdate.setIsAdvisor(teacherRequest.getIsAdvisoryTeacher());
+        User savedTeacher = userRepository.save(teacherToUpdate);
+        return ResponseMessage.<UserResponse>builder()
+                .message(SuccessMessages.TEACHER_UPDATE)
+                .returnBody(userMapper.mapUserToUserResponse(savedTeacher))
+                .httpStatus(HttpStatus.OK)
                 .build();
     }
 }
