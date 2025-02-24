@@ -95,5 +95,16 @@ public class TeacherService {
         methodHelper.checkUserRole(teacher, RoleType.TEACHER);
         List<LessonProgram> lessonPrograms = lessonProgramService.getLessonProgramById(lessonProgram.getLessonProgramId());
 
+//        TODO prevent duplication of lesson programs here
+//        Set -> keeps unique props
+
+        teacher.getLessonProgramList().addAll(lessonPrograms);
+//        update with new lesson program list
+        User savedTeacher = userRepository.save(teacher);
+
+        return ResponseMessage.<UserResponse>builder()
+                .message(SuccessMessages.LESSON_PROGRAM_ADD_TO_TEACHER)
+                .returnBody(userMapper.mapUserToUserResponse(savedTeacher))
+                .build();
     }
 }
