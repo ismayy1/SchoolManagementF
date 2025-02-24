@@ -6,6 +6,7 @@ import com.techproed.entity.enums.RoleType;
 import com.techproed.exception.ResourceNotFoundException;
 import com.techproed.payload.messages.ErrorMessages;
 import com.techproed.payload.requests.abstracts.BaseUserRequest;
+import com.techproed.payload.requests.user.StudentUpdateRequest;
 import com.techproed.payload.requests.user.UserRequest;
 import com.techproed.payload.response.abstracts.BaseUserResponse;
 import com.techproed.payload.response.user.StudentResponse;
@@ -108,6 +109,23 @@ public class UserMapper {
                 .fatherName(student.getFatherName())
                 .lessonProgramList(student.getLessonProgramList())
                 .isActive(student.isActive())
+                .build();
+    }
+
+    public User mapStudentUpdateRequestToUser(StudentUpdateRequest studentUpdateRequest) {
+        return User.builder()
+                .username(studentUpdateRequest.getUsername())
+                .name(studentUpdateRequest.getName())
+                .ssn(studentUpdateRequest.getSsn())
+                .userRole(userRoleService.getUserRole(RoleType.STUDENT))
+                .surname(studentUpdateRequest.getSurname())
+                .birthday(studentUpdateRequest.getBirthDay())
+                .birthplace(studentUpdateRequest.getBirthPlace())
+                .phoneNumber(studentUpdateRequest.getPhoneNumber())
+                .gender(studentUpdateRequest.getGender())
+                .email(studentUpdateRequest.getEmail())
+                .fatherName(studentUpdateRequest.getFatherName())
+                .motherName(studentUpdateRequest.getMotherName())
                 .build();
     }
 }

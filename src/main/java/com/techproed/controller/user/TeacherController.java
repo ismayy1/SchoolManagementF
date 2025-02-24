@@ -50,4 +50,14 @@ public class TeacherController {
     public ResponseMessage<UserResponse> addLessonProgram (@RequestBody @Valid AddLessonProgram lessonProgram) {
         return teacherService.addLessonProgram(lessonProgram);
     }
+
+//    TODO
+//    deleteTeacherById -> when the teacher is deleted, the corresponding
+//    student's advisor teacher ID must be set to null
+
+//    TODO -> not all users, only teachers
+//    getAllByTeacher
+
+//    TODO
+//    getAllTeacherByPage
 }

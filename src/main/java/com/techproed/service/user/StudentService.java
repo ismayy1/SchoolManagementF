@@ -5,6 +5,7 @@ import com.techproed.entity.enums.RoleType;
 import com.techproed.payload.mappers.UserMapper;
 import com.techproed.payload.messages.SuccessMessages;
 import com.techproed.payload.requests.user.StudentRequest;
+import com.techproed.payload.requests.user.StudentUpdateRequest;
 import com.techproed.payload.response.business.ResponseMessage;
 import com.techproed.payload.response.user.StudentResponse;
 import com.techproed.repository.user.UserRepository;
@@ -14,7 +15,11 @@ import com.techproed.service.validator.TimeValidator;
 import com.techproed.service.validator.UniquePropertyValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 @Service
 @RequiredArgsConstructor
@@ -61,5 +66,13 @@ public class StudentService {
             return 1000;
         }
         return userRepository.getMaxStudentNumber() + 1;
+    }
+
+    public ResponseEntity<String> updateStudent(HttpServletRequest httpServletRequest, @Valid StudentUpdateRequest studentUpdateRequest) {
+
+        String username = (String) httpServletRequest.getAttribute("username");
+        User student = methodHelper.loadByUsername(username);
+        uniquePropertyValidator.checkUniqueProperty(student, studentUpdateRequest);
+        User userToUpdate = userMapper.mapStudentUpdateRequestToUser(studentUpdateRequest);
     }
 }
