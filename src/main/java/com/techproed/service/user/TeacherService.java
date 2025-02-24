@@ -7,6 +7,7 @@ import com.techproed.payload.mappers.UserMapper;
 import com.techproed.payload.messages.SuccessMessages;
 import com.techproed.payload.requests.user.TeacherRequest;
 import com.techproed.payload.response.business.ResponseMessage;
+import com.techproed.payload.response.user.StudentResponse;
 import com.techproed.payload.response.user.UserResponse;
 import com.techproed.repository.user.UserRepository;
 import com.techproed.service.business.LessonProgramService;
@@ -16,8 +17,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -73,5 +76,16 @@ public class TeacherService {
                 .returnBody(userMapper.mapUserToUserResponse(savedTeacher))
                 .httpStatus(HttpStatus.OK)
                 .build();
+    }
+
+    public List<StudentResponse> getAllStudentByAdvisorTeacher(HttpServletRequest httpServletRequest) {
+        String username = (String) httpServletRequest.getAttribute("username");
+        User teacher = methodHelper.loadByUsername(username);
+        methodHelper.checkIsAdvisor(teacher);
+
+        return userRepository.findByAdvisorTeacherId(teacher.getId())
+                .stream()
+                .map(userMapper::mapUserToStudentResponse)
+                .collect(Collectors.toList());
     }
 }
