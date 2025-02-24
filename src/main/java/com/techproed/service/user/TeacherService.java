@@ -5,6 +5,7 @@ import com.techproed.entity.concretes.user.User;
 import com.techproed.entity.enums.RoleType;
 import com.techproed.payload.mappers.UserMapper;
 import com.techproed.payload.messages.SuccessMessages;
+import com.techproed.payload.requests.business.AddLessonProgram;
 import com.techproed.payload.requests.user.TeacherRequest;
 import com.techproed.payload.response.business.ResponseMessage;
 import com.techproed.payload.response.user.StudentResponse;
@@ -87,5 +88,12 @@ public class TeacherService {
                 .stream()
                 .map(userMapper::mapUserToStudentResponse)
                 .collect(Collectors.toList());
+    }
+
+    public ResponseMessage<UserResponse> addLessonProgram(@Valid AddLessonProgram lessonProgram) {
+        User teacher = methodHelper.isUserExist(lessonProgram.getTeacherId());
+        methodHelper.checkUserRole(teacher, RoleType.TEACHER);
+        List<LessonProgram> lessonPrograms = lessonProgramService.getLessonProgramById(lessonProgram.getLessonProgramId());
+
     }
 }

@@ -1,5 +1,6 @@
 package com.techproed.controller.user;
 
+import com.techproed.payload.requests.business.AddLessonProgram;
 import com.techproed.payload.requests.user.TeacherRequest;
 import com.techproed.payload.response.business.ResponseMessage;
 import com.techproed.payload.response.user.StudentResponse;
@@ -42,4 +43,11 @@ public class TeacherController {
         return teacherService.getAllStudentByAdvisorTeacher(httpServletRequest);
     }
 
+//    managers can add lesson programs to teacher
+
+    @PreAuthorize("hasAnyAuthority('Admin', 'Dean', 'ViceDean')")
+    @PostMapping("/addLessonProgram")
+    public ResponseMessage<UserResponse> addLessonProgram (@RequestBody @Valid AddLessonProgram lessonProgram) {
+        return teacherService.addLessonProgram(lessonProgram);
+    }
 }
