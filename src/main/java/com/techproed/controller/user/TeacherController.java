@@ -54,6 +54,9 @@ public class TeacherController {
 //    TODO
 //    deleteTeacherById -> when the teacher is deleted, the corresponding
 //    student's advisor teacher ID must be set to null
+    public ResponseMessage deleteTeacherById(@PathVariable Long teacherId) {
+        return teacherService.deleteTeacherById(teacherId);
+    }
 
 //    TODO -> not all users, only teachers
 //    getAllByTeacher

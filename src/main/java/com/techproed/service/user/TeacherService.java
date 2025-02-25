@@ -21,6 +21,7 @@ import org.springframework.stereotype.Service;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -32,6 +33,7 @@ public class TeacherService {
     private final MethodHelper methodHelper;
     private final UniquePropertyValidator uniquePropertyValidator;
     private final LessonProgramService lessonProgramService;
+    private final User user;
 
     public ResponseMessage<UserResponse> saveTeacher(TeacherRequest teacherRequest) {
 
@@ -105,6 +107,29 @@ public class TeacherService {
         return ResponseMessage.<UserResponse>builder()
                 .message(SuccessMessages.LESSON_PROGRAM_ADD_TO_TEACHER)
                 .returnBody(userMapper.mapUserToUserResponse(savedTeacher))
+                .build();
+    }
+
+    private void studentAdvisor(User teacher) {
+        methodHelper.checkIsAdvisor(teacher);
+        Long advisorId = user.getAdvisorTeacherId();
+
+        if (Objects.equals(advisorId, teacher.getId())) {
+            user.setAdvisorTeacherId(null);
+        }
+    }
+
+    public ResponseMessage deleteTeacherById(Long teacherId) {
+        User teacher = methodHelper.isUserExist(teacherId);
+        methodHelper.checkUserRole(teacher, RoleType.TEACHER);
+
+        studentAdvisor(teacher);
+
+        userRepository.deleteById(teacherId);
+
+        return ResponseMessage.builder()
+                .message(SuccessMessages.ADVISOR_TEACHER_DELETE)
+                .httpStatus(HttpStatus.OK)
                 .build();
     }
 }
