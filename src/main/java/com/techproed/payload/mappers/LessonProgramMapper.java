@@ -30,7 +30,7 @@ public class LessonProgramMapper {
                 .educationTerm(lessonProgram.getEducationTerm())
                 .startTime(lessonProgram.getStartTime())
                 .stopTime(lessonProgram.getStopTime())
-                .lessonName(lessonProgram.getLessons())
+//                .lessonName(lessonProgram.getLessons())
                 .lessonProgramId(lessonProgram.getId())
                 .build();
     }

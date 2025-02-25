@@ -17,6 +17,7 @@ import com.techproed.service.validator.UniquePropertyValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -33,7 +34,6 @@ public class TeacherService {
     private final MethodHelper methodHelper;
     private final UniquePropertyValidator uniquePropertyValidator;
     private final LessonProgramService lessonProgramService;
-    private final User user;
 
     public ResponseMessage<UserResponse> saveTeacher(TeacherRequest teacherRequest) {
 
@@ -110,24 +110,15 @@ public class TeacherService {
                 .build();
     }
 
-    private void studentAdvisor(User teacher) {
-        methodHelper.checkIsAdvisor(teacher);
-        Long advisorId = user.getAdvisorTeacherId();
-
-        if (Objects.equals(advisorId, teacher.getId())) {
-            user.setAdvisorTeacherId(null);
-        }
-    }
-
-    public ResponseMessage deleteTeacherById(Long teacherId) {
+    @Transactional
+    public ResponseMessage<UserResponse> deleteTeacherById(Long teacherId) {
         User teacher = methodHelper.isUserExist(teacherId);
-        methodHelper.checkUserRole(teacher, RoleType.TEACHER);
+        methodHelper.checkUserRole(teacher,RoleType.TEACHER);
 
-        studentAdvisor(teacher);
+        userRepository.removeAdvisorFromStudents(teacherId);
+        userRepository.delete(teacher);
 
-        userRepository.deleteById(teacherId);
-
-        return ResponseMessage.builder()
+        return ResponseMessage.<UserResponse>builder()
                 .message(SuccessMessages.ADVISOR_TEACHER_DELETE)
                 .httpStatus(HttpStatus.OK)
                 .build();

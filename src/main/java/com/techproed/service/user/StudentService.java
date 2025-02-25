@@ -82,4 +82,23 @@ public class StudentService {
 
         return SuccessMessages.STUDENT_UPDATE;
     }
+
+    public ResponseMessage<StudentResponse> updateStudentByManager(Long studentId, @Valid StudentRequest studentRequest) {
+//        Validate user existence
+        User student = methodHelper.isUserExist(studentId);
+        methodHelper.checkUserRole(student, RoleType.STUDENT);
+        uniquePropertyValidator.checkUniqueProperty(student, studentRequest);
+        User studentToUpdate = userMapper.mapUserRequestToUser(studentRequest, RoleType.STUDENT.getName());
+//        add missing props
+        studentToUpdate.setId(student.getId());
+        studentToUpdate.setPassword(student.getPassword());
+        studentToUpdate.setBuildIn(student.getBuildIn());
+        studentToUpdate.setStudentNumber(student.getStudentNumber());
+
+        return ResponseMessage.<StudentResponse>builder()
+                .message(SuccessMessages.STUDENT_UPDATE)
+                .returnBody(userMapper.mapUserToStudentResponse(userRepository.save(studentToUpdate)))
+                .httpStatus(HttpStatus.OK)
+                .build();
+    }
 }

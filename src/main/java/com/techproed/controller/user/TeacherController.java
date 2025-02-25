@@ -51,10 +51,13 @@ public class TeacherController {
         return teacherService.addLessonProgram(lessonProgram);
     }
 
-//    TODO
+//    TODO NESLIHAN
 //    deleteTeacherById -> when the teacher is deleted, the corresponding
 //    student's advisor teacher ID must be set to null
-    public ResponseMessage deleteTeacherById(@PathVariable Long teacherId) {
+
+    @PreAuthorize("hasAnyAuthority('Admin','Dean','ViceDean')")
+    @DeleteMapping("/deleteTeacherById/{teacherId}")
+    public ResponseMessage<UserResponse> deleteTeacherById(@PathVariable Long teacherId){
         return teacherService.deleteTeacherById(teacherId);
     }
 
