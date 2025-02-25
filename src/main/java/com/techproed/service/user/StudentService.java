@@ -1,9 +1,11 @@
 package com.techproed.service.user;
 
+import com.techproed.entity.concretes.business.LessonProgram;
 import com.techproed.entity.concretes.user.User;
 import com.techproed.entity.enums.RoleType;
 import com.techproed.payload.mappers.UserMapper;
 import com.techproed.payload.messages.SuccessMessages;
+import com.techproed.payload.requests.business.AddLessonProgramForStudent;
 import com.techproed.payload.requests.user.StudentRequest;
 import com.techproed.payload.requests.user.StudentUpdateRequest;
 import com.techproed.payload.response.business.ResponseMessage;
@@ -20,6 +22,7 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -100,5 +103,24 @@ public class StudentService {
                 .returnBody(userMapper.mapUserToStudentResponse(userRepository.save(studentToUpdate)))
                 .httpStatus(HttpStatus.OK)
                 .build();
+    }
+
+    public ResponseMessage<StudentResponse> addLessonProgram(
+            HttpServletRequest httpServletRequest,
+            @Valid AddLessonProgramForStudent addLessonProgramForStudent) {
+
+        String username = (String) httpServletRequest.getAttribute("username");
+        User loggedInUser = methodHelper.loadByUsername(username);
+//        new lesson programs from request
+        List<LessonProgram> lessonProgramFromDto =
+                lessonProgramService.getLessonProgramById(addLessonProgramForStudent.getLessonProgramId());
+//        existing lesson programs of student
+        List<LessonProgram> studentLessonProgram = loggedInUser.getLessonProgramList();
+
+//        TODO user LessonProgramDuplicationHelper here
+
+        studentLessonProgram.addAll(lessonProgramFromDto);
+
+        return null;
     }
 }

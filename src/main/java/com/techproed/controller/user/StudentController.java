@@ -1,5 +1,6 @@
 package com.techproed.controller.user;
 
+import com.techproed.payload.requests.business.AddLessonProgramForStudent;
 import com.techproed.payload.requests.user.StudentRequest;
 import com.techproed.payload.requests.user.StudentUpdateRequest;
 import com.techproed.payload.response.business.ResponseMessage;
@@ -58,7 +59,7 @@ public class StudentController {
 
     public ResponseMessage<StudentResponse> addLessonProgram(
             HttpServletRequest httpServletRequest,
-            @RequestBody @Valid ) {
-        return studentService.addLessonProgram();
+            @RequestBody @Valid AddLessonProgramForStudent addLessonProgramForStudent) {
+        return studentService.addLessonProgram(httpServletRequest, addLessonProgramForStudent);
     }
 }

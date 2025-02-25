@@ -99,6 +99,7 @@ public class TeacherService {
 
 //        TODO prevent duplication of lesson programs here
 //        Set -> keeps unique props
+//        move the final solution to LessonProgramDuplicationHelper and call it from here
 
         teacher.getLessonProgramList().addAll(lessonPrograms);
 //        update with new lesson program list
