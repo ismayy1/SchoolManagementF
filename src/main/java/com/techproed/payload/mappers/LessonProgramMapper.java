@@ -4,18 +4,17 @@ import com.techproed.entity.concretes.business.EducationTerm;
 import com.techproed.entity.concretes.business.Lesson;
 import com.techproed.entity.concretes.business.LessonProgram;
 import com.techproed.payload.requests.business.LessonProgramRequest;
-import com.techproed.payload.response.LessonProgramResponse;
-import org.springframework.stereotype.Component;
-
+import com.techproed.payload.response.business.LessonProgramResponse;
 import java.util.List;
-import java.util.Set;
+import org.springframework.stereotype.Component;
 
 @Component
 public class LessonProgramMapper {
 
+
     public LessonProgram mapLessonProgramRequestToLessonProgram(
             LessonProgramRequest lessonProgramRequest,
-            List<Lesson>lessonSet, EducationTerm educationTerm) {
+            List<Lesson> lessonSet, EducationTerm educationTerm) {
         return LessonProgram.builder()
                 .startTime(lessonProgramRequest.getStartTime())
                 .stopTime(lessonProgramRequest.getStopTime())
@@ -31,8 +30,15 @@ public class LessonProgramMapper {
                 .educationTerm(lessonProgram.getEducationTerm())
                 .startTime(lessonProgram.getStartTime())
                 .stopTime(lessonProgram.getStopTime())
-//                .lessonName(lessonProgram.getLessons())
+                .lessonName(lessonProgram.getLessons())
                 .lessonProgramId(lessonProgram.getId())
                 .build();
     }
+
+
+
+
+
+
+
 }
