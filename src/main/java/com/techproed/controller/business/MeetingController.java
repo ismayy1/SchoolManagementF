@@ -5,6 +5,7 @@ import com.techproed.payload.response.business.MeetingResponse;
 import com.techproed.payload.response.business.ResponseMessage;
 import com.techproed.service.business.MeetingService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,12 +19,24 @@ public class MeetingController {
 
     private final MeetingService meetingService;
 
+//    TODO till this time
+//    response status doesn't work, we can fix this with the annotation below
+    @ResponseStatus(HttpStatus.CREATED)
     @PreAuthorize(("hasAnyAuthority('Teacher')"))
-    @PutMapping("/save")
+    @PostMapping("/save")
     public ResponseMessage<MeetingResponse> saveMeeting(
             HttpServletRequest httpServletRequest,
             @RequestBody @Valid MeetingRequest meetingRequest) {
 
         return meetingService.save(httpServletRequest, meetingRequest);
+    }
+
+    @PreAuthorize(("hasAnyAuthority('Teacher', 'Admin')"))
+    @PutMapping("/update/{meetingId}")
+    public ResponseMessage<MeetingResponse> updateMeeting(
+            @RequestBody @Valid MeetingRequest meetingRequest,
+            @PathVariable Long meetingId,
+            HttpServletRequest httpServletRequest) {
+        return meetingService.update(meetingRequest, meetingId, httpServletRequest);
     }
 }

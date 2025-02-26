@@ -69,4 +69,8 @@ public class MethodHelper {
         }
         return contactMessages;
     }
+
+    public List<User> getUserList(List<Long> userIdList) {
+        return userRepository.findByUserIdList(userIdList);
+    }
 }

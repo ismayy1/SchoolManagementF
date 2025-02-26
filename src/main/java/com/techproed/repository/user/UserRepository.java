@@ -40,4 +40,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Modifying
     @Query("UPDATE User u SET u.advisorTeacherId = NULL WHERE u.advisorTeacherId = :teacherId")
     void removeAdvisorFromStudents(@Param("teacherId") Long teacherId);
+
+    @Query("SELECT u FROM User u WHERE u.id IN :userIdList")
+    List<User> findByUserIdList(List<Long> userIdList);
 }
