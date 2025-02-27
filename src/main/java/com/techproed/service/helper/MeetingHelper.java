@@ -25,7 +25,6 @@ public class MeetingHelper {
     private final MethodHelper methodHelper;
     private final MeetingRepository meetingRepository;
 
-
     // Ö1 > m1 , m4
     // Ö2 > m1 , m3
     // Ö3 > m2 , m5 , m6

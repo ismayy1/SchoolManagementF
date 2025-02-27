@@ -2,9 +2,7 @@ package com.techproed.payload.messages;
 
 public class ErrorMessages {
 
-    private ErrorMessages() {
-
-    }
+    private ErrorMessages() {}
 
     //user
     public static final String NOT_HAVE_EXPECTED_ROLE_USER = "Error: User does not have expected role";

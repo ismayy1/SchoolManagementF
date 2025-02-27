@@ -11,8 +11,4 @@ import org.springframework.context.annotation.Configuration;
 @OpenAPIDefinition(info = @Info(title = "StudentManagement API", version = "1.0.0"),
         security =@SecurityRequirement(name = "Bearer"))
 @SecurityScheme(name = "Bearer", type = SecuritySchemeType.HTTP, scheme ="Bearer")
-public class OpenAPIConfig {
-
-
-
-}
+public class OpenAPIConfig {}

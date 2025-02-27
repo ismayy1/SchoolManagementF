@@ -81,7 +81,6 @@ public class User {
     )
     private List<LessonProgram>lessonProgramList;
 
-
     @JsonIgnore
     @ManyToMany(mappedBy = "studentList")
     private List<Meet>meetList;

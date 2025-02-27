@@ -33,7 +33,6 @@ public class AuthenticationController {
             HttpServletRequest httpServletRequest) {
 
         authenticationService.changePassword(updatePasswordRequest, httpServletRequest);
-
         return ResponseEntity.ok(SuccessMessages.PASSWORD_CHANGED_RESPONSE_MESSAGE);
     }
 }

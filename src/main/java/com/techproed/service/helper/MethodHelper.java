@@ -39,7 +39,6 @@ public class MethodHelper {
         if (user == null) {
             throw new ResourceNotFoundException(String.format(ErrorMessages.NOT_FOUND_USER_MESSAGE, username));
         }
-
         return user;
     }
 

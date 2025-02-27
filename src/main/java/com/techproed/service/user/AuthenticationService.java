@@ -40,14 +40,10 @@ public class AuthenticationService {
 //        injection of security in service
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(username, password));
-
 //        security authentication is done with the line below
         SecurityContextHolder.getContext().setAuthentication(authentication);
-
         String token = jwtUtils.generateToken(authentication);
-
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
-
         String userRole = userDetails.getAuthorities().iterator().next().getAuthority();
 
         return AuthenticationResponse.builder()
