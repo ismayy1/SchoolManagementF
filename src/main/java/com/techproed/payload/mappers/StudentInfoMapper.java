@@ -3,7 +3,6 @@ package com.techproed.payload.mappers;
 import com.techproed.entity.concretes.business.StudentInfo;
 import com.techproed.entity.enums.Note;
 import com.techproed.payload.requests.business.StudentInfoRequest;
-import com.techproed.payload.requests.user.StudentRequest;
 import com.techproed.payload.response.business.StudentInfoResponse;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;

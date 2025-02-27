@@ -5,7 +5,6 @@ import com.techproed.payload.response.business.ResponseMessage;
 import com.techproed.payload.response.business.StudentInfoResponse;
 import com.techproed.service.business.StudentInfoService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,8 +18,7 @@ public class StudentInfoController {
 
     private final StudentInfoService studentInfoService;
 
-    @ResponseStatus(HttpStatus.CREATED)
-    @PreAuthorize(("hasAnyAuthority('Teacher')"))
+    @PreAuthorize("hasAnyAuthority('Teacher')")
     @PostMapping("/save")
     public ResponseMessage<StudentInfoResponse> saveStudentInfo(
             HttpServletRequest httpServletRequest,
