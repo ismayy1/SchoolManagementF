@@ -54,12 +54,11 @@ public class MeetingController {
     //TODO neslihan
     @PreAuthorize("hasAnyAuthority('Teacher')")
     @GetMapping("/getAllByPageTeacher")
-    public Page<MeetingResponse> getAllByPageTeacher(
+    public ResponseEntity<ResponseMessage<Page<MeetingResponse>>> getAllByPageTeacher(
             HttpServletRequest httpServletRequest,
             @RequestParam(value = "page",defaultValue = "0") int page,
             @RequestParam(value = "size",defaultValue = "10") int size){
-        //return meetingService.getAllByPageTeacher(page,size,httpServletRequest);
-        return null;
+        return meetingService.getAllByPageTeacher(page,size,httpServletRequest);
     }
 
     //TODO edip
