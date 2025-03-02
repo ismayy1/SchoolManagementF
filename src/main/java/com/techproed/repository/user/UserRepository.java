@@ -1,6 +1,7 @@
 package com.techproed.repository.user;
 
 import com.techproed.entity.concretes.user.User;
+import com.techproed.entity.enums.RoleType;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -43,4 +44,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     @Query("SELECT u FROM User u WHERE u.id IN :userIdList")
     List<User> findByUserIdList(List<Long> userIdList);
+
+    Page<User> findAllByUserRole(RoleType roleType, Pageable pageable);
 }
