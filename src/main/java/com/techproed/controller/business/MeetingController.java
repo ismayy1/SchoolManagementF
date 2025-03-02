@@ -7,6 +7,7 @@ import com.techproed.service.business.MeetingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -45,9 +46,9 @@ public class MeetingController {
     //TODO furkan
     @PreAuthorize("hasAnyAuthority('Admin','Teacher')")
     @DeleteMapping("/delete/{meetingId}")
-    public ResponseMessage deleteById(@PathVariable Long meetingId){
-        //return meetingService.deleteById(meetingId);
-        return null;
+    public ResponseEntity<String> deleteById(
+            @PathVariable Long meetingId ,HttpServletRequest httpServletRequest){
+        return ResponseEntity.ok(meetingService.deleteById(meetingId, httpServletRequest));
     }
 
     //TODO neslihan
