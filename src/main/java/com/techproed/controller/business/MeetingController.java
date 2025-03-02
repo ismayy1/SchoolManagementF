@@ -75,7 +75,7 @@ public class MeetingController {
     public Page<MeetingResponse> getAllByPage(
             @RequestParam(value = "page") int page,
             @RequestParam(value = "size") int size){
-        //return meetingService.getAllByPage(page, size);
-        return null;
+        return meetingService.getAllByPage(page, size);
+//        return null;
     }
 }

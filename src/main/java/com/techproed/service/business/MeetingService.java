@@ -121,4 +121,11 @@ public class MeetingService {
                         .build();
         return ResponseEntity.status(responseMessage.getHttpStatus()).body(responseMessage);
     }
+
+    public Page<MeetingResponse> getAllByPage(int page, int size) {
+
+        Pageable pageable = pageableHelper.getPageableByPageAndSize(page, size);
+        Page<Meet> meets =meetingRepository.findAll(pageable);
+        return meets.map(meetingMapper::mapMeetingToMeetingResponse);
+    }
 }
