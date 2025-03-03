@@ -65,8 +65,8 @@ public class MeetingController {
     @PreAuthorize("hasAnyAuthority('Teacher','Student')")
     @GetMapping("/getAll")
     public List<MeetingResponse> getAllMeetings(HttpServletRequest httpServletRequest){
-        //return meetingService.getAll(httpServletRequest);
-        return null;
+        return meetingService.getAll(httpServletRequest);
+//        return null;
     }
 
     //TODO ismail

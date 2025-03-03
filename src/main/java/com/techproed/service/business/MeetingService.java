@@ -1,5 +1,6 @@
 package com.techproed.service.business;
 
+import com.techproed.entity.concretes.business.LessonProgram;
 import com.techproed.entity.concretes.business.Meet;
 import com.techproed.entity.concretes.user.User;
 import com.techproed.payload.mappers.MeetingMapper;
@@ -22,6 +23,7 @@ import org.springframework.stereotype.Service;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -127,5 +129,15 @@ public class MeetingService {
         Pageable pageable = pageableHelper.getPageableByPageAndSize(page, size);
         Page<Meet> meets =meetingRepository.findAll(pageable);
         return meets.map(meetingMapper::mapMeetingToMeetingResponse);
+    }
+
+    public List<MeetingResponse> getAll(HttpServletRequest httpServletRequest) {
+
+//        String username = (String) httpServletRequest.getAttribute("username");
+
+        List<Meet> allMeetings = meetingRepository.findAll();
+        return allMeetings.stream()
+                .map(meetingMapper::mapMeetingToMeetingResponse)
+                .collect(Collectors.toList());
     }
 }
