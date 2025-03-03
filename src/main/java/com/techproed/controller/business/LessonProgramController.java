@@ -41,8 +41,8 @@ public class LessonProgramController {
     @PreAuthorize("hasAnyAuthority('Admin','Dean','ViceDean','Teacher','Student')")
     @GetMapping("/getLessonProgram/{id}")
     public LessonProgramResponse getLessonProgramById(@PathVariable Long id) {
-        //return lessonProgramService.findById(id);
-        return null;
+        return lessonProgramService.findById(id);
+//        return null;
     }
 
     @PreAuthorize("hasAnyAuthority('Admin','Dean','ViceDean','Teacher','Student')")
