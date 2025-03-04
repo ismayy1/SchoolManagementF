@@ -15,7 +15,7 @@ public class StudentInfoMapper {
 
     private final UserMapper userMapper;
 
-    public StudentInfo mapStudentInfoRequestToSTudentInfo(
+    public StudentInfo mapStudentInfoRequestToStudentInfo(
             StudentInfoRequest studentInfoRequest,
             Note note, Double average) {
 

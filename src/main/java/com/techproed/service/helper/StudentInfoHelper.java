@@ -1,7 +1,9 @@
 package com.techproed.service.helper;
 
+import com.techproed.entity.concretes.business.StudentInfo;
 import com.techproed.entity.enums.Note;
 import com.techproed.exception.ConflictException;
+import com.techproed.exception.ResourceNotFoundException;
 import com.techproed.payload.messages.ErrorMessages;
 import com.techproed.repository.business.StudentInfoRepository;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +21,7 @@ public class StudentInfoHelper {
     private Double midtermExamPercentage;
 
     private final StudentInfoRepository studentInfoRepository;
+    private final StudentInfo studentInfo;
 
     public void validateLessonDuplication(Long studentId, String lessonName) {
 
@@ -48,5 +51,10 @@ public class StudentInfoHelper {
         } else {
             return Note.AA;
         }
+    }
+
+    public StudentInfo isStudentInfoExistById(Long id){
+        return studentInfoRepository.findById(id)
+                .orElseThrow(()->new ResourceNotFoundException(String.format(ErrorMessages.STUDENT_INFO_NOT_FOUND,id)));
     }
 }
