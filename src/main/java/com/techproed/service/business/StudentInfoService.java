@@ -78,8 +78,7 @@ public class StudentInfoService {
                 .build();
     }
 
-    public List<StudentInfoResponse> findStudentInfoByStudentId(
-            Long studentId) {
+    public List<StudentInfoResponse> findStudentInfoByStudentId(Long studentId) {
         User student = methodHelper.isUserExist(studentId);
         methodHelper.checkUserRole(student, RoleType.STUDENT);
         List<StudentInfo> studentInfoList = studentInfoRepository.findByStudent_Id(studentId);
@@ -93,7 +92,9 @@ public class StudentInfoService {
                 studentInfoHelper.isStudentInfoExistById(studentInfoId));
     }
 
-    public ResponseMessage<StudentInfoResponse> updateStudentInfo(@Valid StudentInfoUpdateRequest studentInfoUpdateRequest, Long id) {
+    public ResponseMessage<StudentInfoResponse> updateStudentInfo
+            (@Valid StudentInfoUpdateRequest studentInfoUpdateRequest, Long id) {
+
         // 1. Find the existing StudentInfo record
         StudentInfo existingStudentInfo = studentInfoRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException(ErrorMessages.STUDENT_INFO_NOT_FOUND));
@@ -134,10 +135,8 @@ public class StudentInfoService {
                 .build();
     }
 
-
-
-    public Page<StudentInfoResponse> findByTeacherOrStudentByPage(HttpServletRequest servletRequest,
-                                                                  int page, int size) {
+    public Page<StudentInfoResponse> findByTeacherOrStudentByPage(
+            HttpServletRequest servletRequest, int page, int size) {
         //preparing the pageable
         Pageable pageable = pageableHelper.getPageableByPageAndSize(page, size);
         //finding out who logged in
@@ -162,24 +161,21 @@ public class StudentInfoService {
             : studentInfoRepository.findAllByStudent_Id(loggedInUser.getId(), pageable);*/
 
         return studentInfoPage.map(studentInfoMapper::mapStudentInfoToStudentInfoResponse);
-
     }
 
 
-    public Page<StudentInfoResponse> findStudentInfoByPage(int page, int size, String sort,
-                                                           String type) {
+    public Page<StudentInfoResponse> findStudentInfoByPage(
+            int page, int size, String sort, String type) {
+
         Pageable pageable = pageableHelper.getPageable(page, size, sort, type);
         Page<StudentInfo> studentInfos = studentInfoRepository.findAll(pageable);
         return studentInfos.map(studentInfoMapper::mapStudentInfoToStudentInfoResponse);
-
     }
 
 
     public ResponseMessage deleteStudentInfoById(Long id) {
-
         StudentInfo studentInfo = studentInfoHelper.isStudentInfoExistById(id);
         studentInfoRepository.delete(studentInfo);
-
         return ResponseMessage.builder()
                 .message(SuccessMessages.STUDENT_INFO_DELETE)
                 .build();
