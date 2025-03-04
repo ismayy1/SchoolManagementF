@@ -25,6 +25,8 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -76,8 +78,22 @@ public class StudentInfoService {
                 .build();
     }
 
+    public List<StudentInfoResponse> findStudentInfoByStudentId(
+            Long studentId) {
+        User student = methodHelper.isUserExist(studentId);
+        methodHelper.checkUserRole(student, RoleType.STUDENT);
+        List<StudentInfo> studentInfoList = studentInfoRepository.findByStudent_Id(studentId);
+        return  studentInfoList.stream()
+                .map(studentInfoMapper::mapStudentInfoToStudentInfoResponse)
+                .collect(Collectors.toList());
+    }
 
-    public ResponseMessage<StudentInfoResponse> updateStudentInfo(@Valid StudentInfoUpdateRequest studentInfoUpdateRequest, Integer id) {
+    public StudentInfoResponse findById(Long studentInfoId) {
+        return studentInfoMapper.mapStudentInfoToStudentInfoResponse(
+                studentInfoHelper.isStudentInfoExistById(studentInfoId));
+    }
+
+    public ResponseMessage<StudentInfoResponse> updateStudentInfo(@Valid StudentInfoUpdateRequest studentInfoUpdateRequest, Long id) {
         // 1. Find the existing StudentInfo record
         StudentInfo existingStudentInfo = studentInfoRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException(ErrorMessages.STUDENT_INFO_NOT_FOUND));
