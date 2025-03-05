@@ -34,7 +34,6 @@ public class ContactMessageService {
             @Valid ContactMessageRequest contactMessageRequest) {
 
         ContactMessage savedMessage = contactMessageMapper.mapToEntity(contactMessageRequest);
-
         contactMessageRepository.save(savedMessage);
         return ResponseMessage.<ContactMessageResponse>builder()
                 .message(SuccessMessages.MESSAGE_CREATE)
@@ -42,7 +41,6 @@ public class ContactMessageService {
                 .httpStatus(HttpStatus.CREATED)
                 .build();
     }
-
 
     public ResponseMessage<List<ContactMessageResponse>> getAllContactMessages() {
         List<ContactMessage> allMessages = contactMessageRepository.findAll();
@@ -172,6 +170,4 @@ public class ContactMessageService {
                 .httpStatus(HttpStatus.OK)
                 .build();
     }
-
-
 }

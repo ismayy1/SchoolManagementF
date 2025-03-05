@@ -68,9 +68,6 @@ public class EducationTermService {
                         throw new BadRequestException(ErrorMessages.EDUCATION_TERM_CONFLICT_MESSAGE);
                     }
                 });
-
-//                                                            2025-09-05
-//                    ------------------------- 2025-06-01 -- 2025-07-30 -------------------------
     }
 
     private void validationEducationTermDatesForRequest(EducationTermRequest educationTermRequest) {
