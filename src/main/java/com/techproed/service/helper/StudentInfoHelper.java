@@ -24,7 +24,6 @@ public class StudentInfoHelper {
     private final StudentInfo studentInfo;
 
     public void validateLessonDuplication(Long studentId, String lessonName) {
-
         if (studentInfoRepository.isStudentInfoExistForLesson(studentId, lessonName)) {
             throw new ConflictException(
                     String.format(ErrorMessages.ALREADY_CREATED_STUDENT_INFO_FOR_LESSON, lessonName));

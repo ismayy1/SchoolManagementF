@@ -12,6 +12,7 @@ import com.techproed.payload.response.business.ResponseMessage;
 import com.techproed.payload.response.user.StudentResponse;
 import com.techproed.repository.user.UserRepository;
 import com.techproed.service.business.LessonProgramService;
+import com.techproed.service.helper.LessonProgramDuplicationHelper;
 import com.techproed.service.helper.MethodHelper;
 import com.techproed.service.validator.TimeValidator;
 import com.techproed.service.validator.UniquePropertyValidator;
@@ -33,6 +34,7 @@ public class StudentService {
     private final UserRepository userRepository;
     private final LessonProgramService lessonProgramService;
     private final TimeValidator timeValidator;
+    private final LessonProgramDuplicationHelper lessonProgramDuplicationHelper;
 
     public ResponseMessage<StudentResponse> save(StudentRequest studentRequest) {
 
@@ -117,9 +119,9 @@ public class StudentService {
         List<LessonProgram> studentLessonProgram = loggedInUser.getLessonProgramList();
 
 //        TODO user LessonProgramDuplicationHelper here
+        lessonProgramDuplicationHelper.removeDuplicates(lessonProgramFromDto,studentLessonProgram);
 
         studentLessonProgram.addAll(lessonProgramFromDto);
-
         return null;
     }
 }

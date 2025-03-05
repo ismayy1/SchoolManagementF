@@ -1,6 +1,5 @@
 package com.techproed.service.business;
 
-import com.techproed.entity.concretes.business.LessonProgram;
 import com.techproed.entity.concretes.business.Meet;
 import com.techproed.entity.concretes.user.User;
 import com.techproed.payload.mappers.MeetingMapper;

@@ -102,9 +102,7 @@ public class LessonProgramService {
     }
 
     public LessonProgramResponse findById(Long id) {
-
         LessonProgram lessonProgram = isLessonProgramExist(id);
         return lessonProgramMapper.mapLessonProgramToLessonProgramResponse(lessonProgram);
-
     }
 }

@@ -163,7 +163,6 @@ public class StudentInfoService {
         return studentInfoPage.map(studentInfoMapper::mapStudentInfoToStudentInfoResponse);
     }
 
-
     public Page<StudentInfoResponse> findStudentInfoByPage(
             int page, int size, String sort, String type) {
 
@@ -171,7 +170,6 @@ public class StudentInfoService {
         Page<StudentInfo> studentInfos = studentInfoRepository.findAll(pageable);
         return studentInfos.map(studentInfoMapper::mapStudentInfoToStudentInfoResponse);
     }
-
 
     public ResponseMessage deleteStudentInfoById(Long id) {
         StudentInfo studentInfo = studentInfoHelper.isStudentInfoExistById(id);

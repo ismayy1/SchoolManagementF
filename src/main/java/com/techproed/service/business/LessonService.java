@@ -19,13 +19,11 @@ import org.springframework.stereotype.Service;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class LessonService {
-
 
     private final LessonRepository lessonRepository;
     private final LessonMapper lessonMapper;
@@ -46,7 +44,6 @@ public class LessonService {
                 .build();
     }
 
-
     private void isLessonExistByName(String lessonName) {
         if (lessonRepository.findByLessonNameEqualsIgnoreCase(lessonName).isPresent()) {
             throw new ConflictException(String.format(ErrorMessages.ALREADY_CREATED_LESSON_MESSAGE, lessonName));
@@ -58,7 +55,6 @@ public class LessonService {
                 .orElseThrow(() -> new ResourceNotFoundException(
                         String.format(ErrorMessages.NOT_FOUND_LESSON_MESSAGE, lessonId)));
         lessonRepository.delete(lesson);
-
         return lesson;
     }
 
@@ -82,7 +78,6 @@ public class LessonService {
         return lessonMapper.mapLessonToLessonResponse(savedLesson);
     }
 
-
     public Page<LessonResponse> getLessonByPage(int page, int size, String sort, String type) {
 
         Pageable pageable = pageableHelper.getPageable(page, size, sort, type);
@@ -91,7 +86,6 @@ public class LessonService {
     }
 
     public ResponseMessage<LessonResponse> findLessonByName(String lessonName) {
-
         return ResponseMessage.<LessonResponse>builder()
                 .message(SuccessMessages.LESSON_FOUND)
                 .returnBody(lessonMapper.mapLessonToLessonResponse(getLessonByName(lessonName)))
@@ -106,7 +100,6 @@ public class LessonService {
     }
 
     public ResponseMessage deleteLesson(Long lessonId) {
-
         return ResponseMessage.<LessonResponse>builder()
                 .returnBody(lessonMapper.mapLessonToLessonResponse(deleteLessonById(lessonId)))
                 .httpStatus(HttpStatus.OK)
