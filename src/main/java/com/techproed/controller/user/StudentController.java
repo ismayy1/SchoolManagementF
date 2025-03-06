@@ -53,8 +53,8 @@ public class StudentController {
             @RequestParam Long id,
             @RequestParam boolean status) {
 
-//        return studentService.changeStatus(id, status);
-        return null;
+        return studentService.changeStatus(id, status);
+//        return null;
     }
 
     public ResponseMessage<StudentResponse> addLessonProgram(
