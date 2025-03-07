@@ -54,7 +54,6 @@ public class StudentController {
             @RequestParam boolean status) {
 
         return studentService.changeStatus(id, status);
-//        return null;
     }
 
     public ResponseMessage<StudentResponse> addLessonProgram(
