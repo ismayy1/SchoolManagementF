@@ -11,7 +11,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class LessonProgramMapper {
 
-
     public LessonProgram mapLessonProgramRequestToLessonProgram(
             LessonProgramRequest lessonProgramRequest,
             List<Lesson> lessonSet, EducationTerm educationTerm) {
@@ -34,11 +33,4 @@ public class LessonProgramMapper {
                 .lessonProgramId(lessonProgram.getId())
                 .build();
     }
-
-
-
-
-
-
-
 }

@@ -59,7 +59,6 @@ public class LessonProgram {
     @ManyToMany(mappedBy = "lessonProgramList",fetch = FetchType.EAGER)
     private Set<User>users;
 
-
     @PreRemove
     private void removeLessonFromUser(){
         users.forEach(user -> user.getLessonProgramList().remove(this));

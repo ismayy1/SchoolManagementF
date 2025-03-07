@@ -19,6 +19,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class Lesson {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -32,8 +33,4 @@ public class Lesson {
     @JsonIgnore
     @ManyToMany(mappedBy = "lessons")
     private Set<LessonProgram>lessonPrograms;
-
-
-
-
 }

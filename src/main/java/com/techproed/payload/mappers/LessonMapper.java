@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class LessonMapper {
 
-
     public Lesson mapLessonRequestToLesson(LessonRequest lessonRequest) {
         return Lesson.builder()
                 .lessonName(lessonRequest.getLessonName())

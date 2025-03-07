@@ -56,7 +56,8 @@ public class UserController {
 
     @PreAuthorize("hasAnyAuthority('Admin')")
     @PutMapping("/update/{userId}")
-    public ResponseMessage<UserResponse> updateUserById(@RequestBody @Valid UserRequest userRequest, @PathVariable Long userId) {
+    public ResponseMessage<UserResponse> updateUserById(
+            @RequestBody @Valid UserRequest userRequest, @PathVariable Long userId) {
 
         return userService.updateUserById(userRequest, userId);
     }
@@ -66,8 +67,8 @@ public class UserController {
     public ResponseEntity<String> updateLoggedInUser(
             @RequestBody @Valid UserRequestWithoutPassword userRequestWithoutPassword,
             HttpServletRequest httpServletRequest) {
-
-        return ResponseEntity.ok(userService.updateLoggedInUser(userRequestWithoutPassword, httpServletRequest));
+        return ResponseEntity.ok(
+                userService.updateLoggedInUser(userRequestWithoutPassword, httpServletRequest));
     }
 
 

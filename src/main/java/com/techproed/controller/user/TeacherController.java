@@ -77,7 +77,6 @@ public class TeacherController {
             @RequestParam(value = "type", defaultValue = "desc") String type) {
 
         Page<UserResponse> teacherResponses = teacherService.getAllTeacherByPage(page, size, sort, type);
-
         return ResponseEntity.ok(teacherResponses);
     }
 }

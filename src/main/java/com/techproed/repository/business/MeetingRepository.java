@@ -11,7 +11,6 @@ import java.util.List;
 @Repository
 public interface MeetingRepository extends JpaRepository<Meet, Long> {
 
-
     List<Meet> findByStudentList_IdEquals(Long studentId);
 
     List<Meet> getByAdvisoryTeacher_IdEquals(Long studentId);
