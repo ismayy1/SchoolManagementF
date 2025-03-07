@@ -137,6 +137,5 @@ public class StudentService {
                 .returnBody(userMapper.mapUserToStudentResponse(updateStudentUser))
                 .httpStatus(HttpStatus.OK)
                 .build();
-
     }
 }

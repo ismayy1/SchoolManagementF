@@ -20,7 +20,6 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -31,7 +30,6 @@ public class UserService {
     private final UserRepository userRepository;
     private final MethodHelper methodHelper;
     private final PageableHelper pageableHelper;
-
 
     public ResponseMessage<UserResponse> saveUser(UserRequest userRequest, String userRole) {
 //        Validate unique properties
