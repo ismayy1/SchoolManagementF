@@ -23,7 +23,6 @@ public class LessonProgramController {
 
     private final LessonProgramService lessonProgramService;
 
-
     @PreAuthorize("hasAnyAuthority('Admin','Dean','ViceDean')")
     @PostMapping("/save")
     public ResponseMessage<LessonProgramResponse> saveLessonProgram(
@@ -42,7 +41,6 @@ public class LessonProgramController {
     @GetMapping("/getLessonProgram/{id}")
     public LessonProgramResponse getLessonProgramById(@PathVariable Long id) {
         return lessonProgramService.findById(id);
-//        return null;
     }
 
     @PreAuthorize("hasAnyAuthority('Admin','Dean','ViceDean','Teacher','Student')")

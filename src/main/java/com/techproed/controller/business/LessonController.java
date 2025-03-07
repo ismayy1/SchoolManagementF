@@ -26,7 +26,6 @@ public class LessonController {
     @PostMapping("/save")
     public ResponseMessage<LessonResponse> saveLesson(
             @RequestBody @Valid LessonRequest lessonRequest) {
-
         return lessonService.saveLesson(lessonRequest);
     }
 

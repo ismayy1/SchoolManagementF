@@ -30,7 +30,6 @@ public class MeetingController {
     public ResponseMessage<MeetingResponse> saveMeeting(
             HttpServletRequest httpServletRequest,
             @RequestBody @Valid MeetingRequest meetingRequest) {
-
         return meetingService.save(httpServletRequest, meetingRequest);
     }
 
@@ -66,7 +65,6 @@ public class MeetingController {
     @GetMapping("/getAll")
     public List<MeetingResponse> getAllMeetings(HttpServletRequest httpServletRequest){
         return meetingService.getAll(httpServletRequest);
-//        return null;
     }
 
     //TODO ismail
@@ -76,6 +74,5 @@ public class MeetingController {
             @RequestParam(value = "page") int page,
             @RequestParam(value = "size") int size){
         return meetingService.getAllByPage(page, size);
-//        return null;
     }
 }

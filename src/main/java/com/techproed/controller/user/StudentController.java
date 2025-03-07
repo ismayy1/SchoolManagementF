@@ -32,7 +32,6 @@ public class StudentController {
     public ResponseEntity<String> updateStudent(
             HttpServletRequest httpServletRequest,
             @RequestBody @Valid StudentUpdateRequest studentUpdateRequest) {
-
         return ResponseEntity.ok(studentService.updateStudent(httpServletRequest, studentUpdateRequest));
     }
 
@@ -43,7 +42,6 @@ public class StudentController {
     public ResponseMessage<StudentResponse> updateStudentByManager(
             @PathVariable Long studentId,
             @RequestBody @Valid StudentRequest studentRequest) {
-
         return studentService.updateStudentByManager(studentId, studentRequest);
     }
 
@@ -52,7 +50,6 @@ public class StudentController {
     public ResponseMessage changeStatus(
             @RequestParam Long id,
             @RequestParam boolean status) {
-
         return studentService.changeStatus(id, status);
     }
 

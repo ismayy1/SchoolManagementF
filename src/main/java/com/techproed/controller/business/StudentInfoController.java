@@ -28,7 +28,6 @@ public class StudentInfoController {
     public ResponseMessage<StudentInfoResponse> saveStudentInfo(
             HttpServletRequest httpServletRequest,
             @RequestBody @Valid StudentInfoRequest studentInfoRequest) {
-
         return studentInfoService.saveStudentInfo(httpServletRequest, studentInfoRequest);
     }
 
@@ -44,7 +43,6 @@ public class StudentInfoController {
     @DeleteMapping("/delete/{id}")
     public ResponseMessage delete(@PathVariable Long id){
         return studentInfoService.deleteStudentInfoById(id);
-
     }
 
     @PreAuthorize("hasAnyAuthority('Admin','Dean','ViceDean')")
