@@ -23,7 +23,6 @@ public class EducationTermController {
     @PostMapping("/save")
     public ResponseMessage<EducationTermResponse> save(
             @Valid @RequestBody EducationTermRequest educationTermRequest) {
-
         return educationTermService.save(educationTermRequest);
     }
 
@@ -32,7 +31,6 @@ public class EducationTermController {
     public ResponseMessage<EducationTermResponse> updateEducationTerm(
             @Valid @RequestBody EducationTermRequest educationTermRequest,
             @PathVariable Long educationTermId) {
-
         return educationTermService.updateEducationTerms(educationTermRequest, educationTermId);
     }
 
@@ -59,7 +57,6 @@ public class EducationTermController {
             @RequestParam (value = "size", defaultValue = "10") int size,
             @RequestParam (value = "sort", defaultValue = "term") String sort,
             @RequestParam (value = "type", defaultValue = "desc") String type) {
-
         return educationTermService.getByPage(page, size, sort, type);
     }
 

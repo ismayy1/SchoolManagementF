@@ -51,7 +51,6 @@ public class ContactMessageController {
         return ResponseEntity.ok(contactMessageService.getContactMessageByEmail(email));
     }
 
-
     @GetMapping("/getMessagesByCreationDateBetween")
     public ResponseEntity<ResponseMessage<List<ContactMessageResponse>>> getContactMessagesByCreationDateBetween(
             @RequestParam(value = "startDate") String startDate,

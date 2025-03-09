@@ -7,7 +7,6 @@ import com.techproed.payload.requests.user.UserRequest;
 import com.techproed.repository.user.UserRoleRepository;
 import com.techproed.service.user.UserRoleService;
 import com.techproed.service.user.UserService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
