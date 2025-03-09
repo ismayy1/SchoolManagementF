@@ -15,10 +15,8 @@ public class StudentInfoMapper {
 
     private final UserMapper userMapper;
 
-    public StudentInfo mapStudentInfoRequestToStudentInfo(
-            StudentInfoRequest studentInfoRequest,
+    public StudentInfo mapStudentInfoRequestToStudentInfo(StudentInfoRequest studentInfoRequest,
             Note note, Double average) {
-
         return StudentInfo.builder()
                 .infoNote(studentInfoRequest.getInfoNote())
                 .absentee(studentInfoRequest.getAbsentee())

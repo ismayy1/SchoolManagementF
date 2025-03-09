@@ -29,7 +29,6 @@ public class TeacherController {
         return teacherService.saveTeacher(teacherRequest);
     }
 
-
     @PreAuthorize("hasAnyAuthority('Admin')")
     @PutMapping("/update/{userId}")
     public ResponseMessage<UserResponse> updateTeacher(
@@ -46,7 +45,6 @@ public class TeacherController {
     }
 
 //    managers can add lesson programs to teacher
-
     @PreAuthorize("hasAnyAuthority('Admin', 'Dean', 'ViceDean')")
     @PostMapping("/addLessonProgram")
     public ResponseMessage<UserResponse> addLessonProgram (@RequestBody @Valid AddLessonProgram lessonProgram) {

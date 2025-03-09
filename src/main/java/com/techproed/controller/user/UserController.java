@@ -28,7 +28,6 @@ public class UserController {
         return ResponseEntity.ok(userService.saveUser(userRequest, userRole));
     }
 
-
     @PreAuthorize("hasAnyAuthority('Admin')")
     @GetMapping("/getUserByPage/{userRole}")
     public ResponseEntity<Page<UserResponse>> getUserByPage(
@@ -58,7 +57,6 @@ public class UserController {
     @PutMapping("/update/{userId}")
     public ResponseMessage<UserResponse> updateUserById(
             @RequestBody @Valid UserRequest userRequest, @PathVariable Long userId) {
-
         return userService.updateUserById(userRequest, userId);
     }
 
@@ -70,6 +68,4 @@ public class UserController {
         return ResponseEntity.ok(
                 userService.updateLoggedInUser(userRequestWithoutPassword, httpServletRequest));
     }
-
-
 }

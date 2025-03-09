@@ -13,9 +13,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class ContactMessageMapper {
 
-    public ContactMessageResponse mapToResponse(
-            ContactMessage contactMessage) {
-
+    public ContactMessageResponse mapToResponse(ContactMessage contactMessage) {
         return ContactMessageResponse.builder()
                 .name(contactMessage.getName())
                 .email(contactMessage.getEmail())
@@ -25,9 +23,7 @@ public class ContactMessageMapper {
                 .build();
     }
 
-    public ContactMessage mapToEntity(
-            ContactMessageRequest contactMessageRequest) {
-
+    public ContactMessage mapToEntity(ContactMessageRequest contactMessageRequest) {
         return ContactMessage.builder()
                 .name(contactMessageRequest.getName())
                 .email(contactMessageRequest.getEmail())
@@ -36,8 +32,7 @@ public class ContactMessageMapper {
                 .build();
     }
 
-    public List<ContactMessageResponse> mapToResponseList(
-            List<ContactMessage> allMessages) {
+    public List<ContactMessageResponse> mapToResponseList(List<ContactMessage> allMessages) {
         return allMessages.stream()
                 .map(this::mapToResponse)
                 .collect(Collectors.toList());

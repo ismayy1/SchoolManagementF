@@ -1,14 +1,11 @@
 package com.techproed.payload.mappers;
 
-import com.techproed.entity.concretes.business.LessonProgram;
 import com.techproed.entity.concretes.user.User;
 import com.techproed.entity.enums.RoleType;
 import com.techproed.exception.ResourceNotFoundException;
 import com.techproed.payload.messages.ErrorMessages;
 import com.techproed.payload.requests.abstracts.BaseUserRequest;
 import com.techproed.payload.requests.user.StudentUpdateRequest;
-import com.techproed.payload.requests.user.UserRequest;
-import com.techproed.payload.response.abstracts.BaseUserResponse;
 import com.techproed.payload.response.user.StudentResponse;
 import com.techproed.payload.response.user.UserResponse;
 import com.techproed.service.user.UserRoleService;
@@ -16,9 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
