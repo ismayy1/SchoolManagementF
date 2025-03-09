@@ -1,7 +1,6 @@
 package com.techproed.payload.response.user;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.techproed.payload.requests.abstracts.BaseUserRequest;
 import com.techproed.payload.response.abstracts.BaseUserResponse;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
