@@ -107,9 +107,10 @@ public class TeacherService {
 //        Set -> keeps unique props
 //        move the final solution to LessonProgramDuplicationHelper and call it from here
         List<LessonProgram> existingLessonPrograms = teacher.getLessonProgramList();
-        List<LessonProgram> newLessonPrograms = lessonProgramDuplicationHelper.removeDuplicates(existingLessonPrograms,lessonPrograms);
+        List<LessonProgram> newLessonPrograms =
+                lessonProgramDuplicationHelper.removeDuplicates(existingLessonPrograms,lessonPrograms);
 
-        teacher.getLessonProgramList().addAll(lessonPrograms);
+        teacher.getLessonProgramList().addAll(newLessonPrograms);
 //        update with new lesson program list
         User savedTeacher = userRepository.save(teacher);
 

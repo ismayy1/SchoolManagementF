@@ -32,7 +32,6 @@ public class EducationTermService {
     private final PageableHelper pageableHelper;
 
     public ResponseMessage<EducationTermResponse> save(@Valid EducationTermRequest educationTermRequest) {
-
 //        Validation
         validateEducationTermDates(educationTermRequest);
 
