@@ -12,6 +12,7 @@ import com.techproed.payload.response.user.StudentResponse;
 import com.techproed.payload.response.user.UserResponse;
 import com.techproed.repository.user.UserRepository;
 import com.techproed.service.business.LessonProgramService;
+import com.techproed.service.helper.LessonProgramDuplicationHelper;
 import com.techproed.service.helper.MethodHelper;
 import com.techproed.service.helper.PageableHelper;
 import com.techproed.service.validator.UniquePropertyValidator;
@@ -38,6 +39,7 @@ public class TeacherService {
     private final UniquePropertyValidator uniquePropertyValidator;
     private final LessonProgramService lessonProgramService;
     private final PageableHelper pageableHelper;
+    private final LessonProgramDuplicationHelper lessonProgramDuplicationHelper;
 
     public ResponseMessage<UserResponse> saveTeacher(TeacherRequest teacherRequest) {
 
@@ -104,6 +106,8 @@ public class TeacherService {
 //        TODO prevent duplication of lesson programs here
 //        Set -> keeps unique props
 //        move the final solution to LessonProgramDuplicationHelper and call it from here
+        List<LessonProgram> existingLessonPrograms = teacher.getLessonProgramList();
+        List<LessonProgram> newLessonPrograms = lessonProgramDuplicationHelper.removeDuplicates(existingLessonPrograms,lessonPrograms);
 
         teacher.getLessonProgramList().addAll(lessonPrograms);
 //        update with new lesson program list
