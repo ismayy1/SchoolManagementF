@@ -22,11 +22,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -45,7 +43,6 @@ public class TeacherService {
 
         List<LessonProgram> lessonProgramList =
                 lessonProgramService.getLessonProgramById(teacherRequest.getLessonProgramList());
-
 //        validate unique props
         uniquePropertyValidator.checkDuplication(
                 teacherRequest.getUsername(),
@@ -109,7 +106,6 @@ public class TeacherService {
         List<LessonProgram> existingLessonPrograms = teacher.getLessonProgramList();
         List<LessonProgram> newLessonPrograms =
                 lessonProgramDuplicationHelper.removeDuplicates(existingLessonPrograms,lessonPrograms);
-
         teacher.getLessonProgramList().addAll(newLessonPrograms);
 //        update with new lesson program list
         User savedTeacher = userRepository.save(teacher);
@@ -124,7 +120,6 @@ public class TeacherService {
     public ResponseMessage<UserResponse> deleteTeacherById(Long teacherId) {
         User teacher = methodHelper.isUserExist(teacherId);
         methodHelper.checkUserRole(teacher,RoleType.TEACHER);
-
         userRepository.removeAdvisorFromStudents(teacherId);
         userRepository.delete(teacher);
 
