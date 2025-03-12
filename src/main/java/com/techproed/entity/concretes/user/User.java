@@ -10,9 +10,7 @@ import com.techproed.entity.concretes.business.StudentInfo;
 import com.techproed.entity.enums.Gender;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Set;
 import javax.persistence.*;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
