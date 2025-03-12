@@ -1,7 +1,6 @@
 package com.techproed.entity.enums;
 
 public enum Note {
-
     AA,
     BA,
     BB,

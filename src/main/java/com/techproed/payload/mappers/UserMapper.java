@@ -12,7 +12,6 @@ import com.techproed.service.user.UserRoleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
-
 import java.util.Objects;
 
 @Component

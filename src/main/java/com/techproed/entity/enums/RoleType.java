@@ -6,7 +6,6 @@ import lombok.RequiredArgsConstructor;
 @Getter
 @RequiredArgsConstructor
 public enum RoleType {
-
     ADMIN("Admin"),
     TEACHER("Teacher"),
     STUDENT("Student"),
