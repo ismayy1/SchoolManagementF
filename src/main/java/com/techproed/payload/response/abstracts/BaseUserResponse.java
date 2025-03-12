@@ -12,7 +12,6 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @SuperBuilder
 public class BaseUserResponse {
-
     private Long id;
     private String username;
     private String name;
