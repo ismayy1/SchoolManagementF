@@ -129,6 +129,22 @@ public class TeacherService {
                 .build();
     }
 
+    //second solution but this solution hits DB more than the first solution
+    //also fetch data from DB to service layer
+    @Transactional
+    public String deleteTeacherById2(
+            Long teacherId) {
+        User teacher = methodHelper.isUserExist(teacherId);
+        methodHelper.checkUserRole(teacher, RoleType.TEACHER);
+        List<User> students = userRepository.findByAdvisorTeacherId(teacherId);
+        if (!students.isEmpty()) {
+            students.forEach(student->student.setAdvisorTeacherId(null));
+            userRepository.saveAll(students);
+        }
+        userRepository.delete(teacher);
+        return SuccessMessages.ADVISOR_TEACHER_DELETE;
+    }
+
     public Page<UserResponse> getAllTeacherByPage(int page, int size, String sort, String type) {
         Pageable pageable = pageableHelper.getPageable(page, size, sort, type);
         Page<User> teachers = userRepository.findAllByUserRole(RoleType.TEACHER, pageable);
