@@ -35,14 +35,14 @@ public class LessonController {
         return ResponseEntity.ok(lessonService.updateLesson(lessonRequest, lessonId));
     }
 
-//    TODO edip
+//    TODO
     @PreAuthorize("hasAnyAuthority('Admin', 'Dean', 'ViceDean')")
     @PostMapping("/delete/{lessonId}")
     public ResponseMessage deleteLesson(@PathVariable Long lessonId) {
         return lessonService.deleteLesson(lessonId);
     }
 
-    //TODO nesli
+    //TODO
     @PreAuthorize("hasAnyAuthority('Admin','Dean','ViceDean')")
     @GetMapping("/getLessonByName")
     public ResponseMessage<LessonResponse>getLessonByName(
@@ -50,7 +50,7 @@ public class LessonController {
         return lessonService.findLessonByName(lessonName);
     }
 
-    //TODO ertugrul
+    //TODO
     @PreAuthorize("hasAnyAuthority('Admin','Dean','ViceDean')")
     @GetMapping("/getLessonByPage")
     public Page<LessonResponse> findLessonByPage(

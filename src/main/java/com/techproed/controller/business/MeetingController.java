@@ -21,7 +21,7 @@ public class MeetingController {
 
     private final MeetingService meetingService;
 
-//    TODO till this time
+//    TODO
 //    response status doesn't work, we can fix this with the annotation below
     @ResponseStatus(HttpStatus.CREATED)
     @PreAuthorize(("hasAnyAuthority('Teacher')"))
@@ -41,7 +41,7 @@ public class MeetingController {
         return meetingService.update(meetingRequest, meetingId, httpServletRequest);
     }
 
-    //TODO furkan
+    //TODO
     @PreAuthorize("hasAnyAuthority('Admin','Teacher')")
     @DeleteMapping("/delete/{meetingId}")
     public ResponseEntity<String> deleteById(
@@ -49,7 +49,7 @@ public class MeetingController {
         return ResponseEntity.ok(meetingService.deleteById(meetingId, httpServletRequest));
     }
 
-    //TODO neslihan
+    //TODO
     @PreAuthorize("hasAnyAuthority('Teacher')")
     @GetMapping("/getAllByPageTeacher")
     public ResponseEntity<ResponseMessage<Page<MeetingResponse>>> getAllByPageTeacher(
@@ -59,14 +59,14 @@ public class MeetingController {
         return meetingService.getAllByPageTeacher(page,size,httpServletRequest);
     }
 
-    //TODO edip
+    //TODO
     @PreAuthorize("hasAnyAuthority('Teacher','Student')")
     @GetMapping("/getAll")
     public List<MeetingResponse> getAllMeetings(HttpServletRequest httpServletRequest){
         return meetingService.getAll(httpServletRequest);
     }
 
-    //TODO ismail
+    //TODO
     @PreAuthorize("hasAnyAuthority('Admin')")
     @GetMapping("/getAllByPage")
     public Page<MeetingResponse> getAllByPage(

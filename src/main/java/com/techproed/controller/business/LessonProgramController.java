@@ -36,7 +36,7 @@ public class LessonProgramController {
         return lessonProgramService.getAllLessonPrograms();
     }
 
-    //TODO LEVEN
+    //TODO
     @PreAuthorize("hasAnyAuthority('Admin','Dean','ViceDean','Teacher','Student')")
     @GetMapping("/getLessonProgram/{id}")
     public LessonProgramResponse getLessonProgramById(@PathVariable Long id) {
@@ -55,7 +55,7 @@ public class LessonProgramController {
         return lessonProgramService.getAllAssigned();
     }
 
-    //TODO ESRA
+    //TODO
     @PreAuthorize("hasAnyAuthority('Admin','Teacher')")
     @DeleteMapping("/delete/{id}")
     public ResponseMessage deleteLessonProgramById(@PathVariable Long id) {
