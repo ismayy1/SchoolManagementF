@@ -34,7 +34,6 @@ public class EducationTermController {
     }
 
 //    TODO
-//    ummihani
     @PreAuthorize("hasAnyAuthority('Admin', 'Dean', 'ViceDean', 'Teacher')")
     @PostMapping("/getAll")
     public List<EducationTermResponse> getAllEducationTerms() {
@@ -42,7 +41,6 @@ public class EducationTermController {
     }
 
 //    TODO
-//    esra
     @PreAuthorize("hasAnyAuthority('Admin', 'Dean', 'ViceDean', 'Teacher')")
     @PostMapping("/{educationTermId}")
     public EducationTermResponse getEducationTerm(Long educationTermId) {
